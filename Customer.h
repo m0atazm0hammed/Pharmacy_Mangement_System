@@ -1,28 +1,16 @@
 #pragma once
-#include "Person.h"
-#include "varlen.h"
-#include "index.h"
-#include <fstream>
+#include <Person.h>
 class Customer : public Person
 {
-public:
-	static index<int> primary_index;
-	static index<string> secondary_index;
-	static index<int> deleted;
-	static string primary_file_name, secondary_file_name, file_name, deleted_file_name;
-	Customer();
-	Customer(int id, char name[20], char phone_num[50]);
-	Customer(const Customer &other);
-	void AddCustomer();
-	void Write(fstream&);
-	void read(fstream&);
-	int Update(int, char[50]);
-	void ShowEmployeesData(ostream &);
-	void ShowAnEmployee(ostream &);
-	int ReturnPosition(int);
-	set<int>& ReturnPosition(char [20]);
+	string primary_file_name = "customer01.txt", secondary_file_name = "customer02.txt",
+				file_name = "customer00.txt", deleted_file_name = "customerAvail.txt";
+	public:
+		index<int> primary_index;
+		index<string> secondary_index;
+		string primary_file_name = "customer01.txt", secondary_file_name = "customer02.txt",
+				file_name = "customer00.txt", deleted_file_name = "customerAvail.txt";
+		Customer();
+		Customer(int id, char name[20], char phone_num[20]);
+		~Customer();
 	
-	int Exit();
-	int Delete(int);
-	void FirstFit();
 };

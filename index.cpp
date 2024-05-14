@@ -8,9 +8,15 @@
 //Global Variable(s)
 fstream LogicalFile;
 
-template<class T>
-void index<T>::write(std::string& fileName) {
-	fstream file(fileName, ios::out | ios::trunc | ios::binary);
+template <class T>
+index<T>::index()
+{
+}
+
+template <class T>
+void index<T>::write(std::string &fileName)
+{
+    fstream file(fileName, ios::out | ios::trunc | ios::binary);
 	logicalFile.seekp(0, ios::beg);
 	for (auto& [key, values] : keys) {
 		for (auto& value : values) {
