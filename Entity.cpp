@@ -74,33 +74,8 @@ void Entity::load_files()
     else
         LogicalFile.close();
 
-    LogicalFile.open(primary_file_name, ios::in | ios::out | ios::binary);
-    if (LogicalFile.is_open())
-    {
-        while (!LogicalFile.eof())
-        {
-            int id;
-            int offset;
-            LogicalFile.read((char*)&id, sizeof(id));
-            LogicalFile.read((char*)&offset, sizeof(offset));
-            primary_index.add(id, offset);
-        }
-        LogicalFile.close();
-    }
-    LogicalFile.open(secondary_file_name, ios::in | ios::out | ios::binary);
-    if (LogicalFile.is_open())
-    {
-        while (!LogicalFile.eof())
-        {
-            string name;
-            int id;
-            streamsize sz = 0;
-            LogicalFile.getline((char*)&name, sz, '|');
-            LogicalFile.read((char*)&id, sizeof(id));
-            secondary_index.add(name, id);
-        }
-        LogicalFile.close();
-    }
+    primary_index.read(primary_file_name);
+    secondary_index.read(secondary_file_name);
     LogicalFile.open(deleted_file_name, ios::in | ios::out | ios::binary);
     if (LogicalFile.is_open())
     {
@@ -117,28 +92,9 @@ void Entity::load_files()
 
 void Entity::save_files()
 {
-    LogicalFile.open(primary_file_name, ios::out | ios::binary);
-    for (auto i : primary_index.keys)
-    {
-        for (auto j : i.second)
-        {
-            LogicalFile.write((char*)&i.first, sizeof(i.first));
-            LogicalFile.write((char*)&j, sizeof(j));
-        }
-    }
-    LogicalFile.close();
+    primary_index.write(primary_file_name);
 
-    LogicalFile.open(secondary_file_name, ios::out | ios::binary);
-    for (auto i : secondary_index.keys)
-    {
-        for (auto j : i.second)
-        {
-            LogicalFile.write((char*)&i.first, i.first.size());
-            LogicalFile.put('|');
-            LogicalFile.write((char*)&j, sizeof(j));
-        }
-    }
-    LogicalFile.close();
+    secondary_index.write(secondary_file_name);
 
     LogicalFile.open(deleted_file_name, ios::out | ios::binary);
     for (auto i : Avail_List)

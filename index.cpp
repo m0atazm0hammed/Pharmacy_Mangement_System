@@ -3,7 +3,6 @@
 #include <string>
 #include <cstring>
 #include "index.h"
-#include "varlen.h"
 
 //Global Variable(s)
 fstream LogicalFile;
@@ -57,4 +56,3 @@ void index<T>::update(T key, int old_val, int new_val) {
 
 	keys[key].insert(new_val);
 }
-
