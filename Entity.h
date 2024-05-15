@@ -2,8 +2,8 @@
 #include <cstring>
 #include <fstream>
 #include <vector>
-#include <AvailList.h>
-#include <index.h>
+#include "AvailList.h"
+#include "index.h"
 using namespace std;
 
 #ifdef __linux__
@@ -23,8 +23,7 @@ class Entity
 		~Entity();
 		Entity(Entity &other);
 
-		index<int> primary_index;
-		index<string> secondary_index;
+		indx indexes;
 		vector<AvailList> Avail_List;
 		fstream LogicalFile;
 		
@@ -35,13 +34,14 @@ class Entity
 		int ReturnPosition(int);
 		set<int>& ReturnPosition(char [20]);
 		
-		int FirstFit(int);
+		int BestFit(int);
 		void load_files();
 		void save_files();
 
 		void Write();
 		int Size();
 		void Read();
+        int Count(int);
 
         void Name(char name[20]);
         void Id(int id);

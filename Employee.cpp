@@ -1,4 +1,4 @@
-#include <Employee.h>
+#include "Employee.h"
 
 Employee::Employee() : Person(), salary(-1)
 {

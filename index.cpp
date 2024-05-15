@@ -4,20 +4,25 @@
 #include <cstring>
 #include "index.h"
 
-//Global Variable(s)
-fstream LogicalFile;
 
-template <class T>
-index<T>::index()
+indx::indx()
 {
 }
 
-template <class T>
-void index<T>::write(std::string &fileName)
+void indx::write(std::string &fileName, std::string &secondFileName)
 {
     fstream file(fileName, ios::out | ios::trunc | ios::binary);
-	logicalFile.seekp(0, ios::beg);
-	for (auto& [key, values] : keys) {
+	for (auto& [key, values] : primary_keys) {
+		for (auto& value : values) {
+			file.write((char*)&key, sizeof(key));
+			file.put('|');
+			file.write((char*)&value, sizeof(value));
+			file.put('|');
+		}
+	}
+	file.close();
+	file.open(secondFileName, ios::out | ios::trunc | ios::binary);
+	for (auto& [key, values] : secondary_keys) {
 		for (auto& value : values) {
 			file.write((char*)&key, sizeof(key));
 			file.put('|');
@@ -28,31 +33,31 @@ void index<T>::write(std::string &fileName)
 	file.close();
 }
 
-template<class T>
-void index<T>::read(std::string& fileName) {
+void indx::read(std::string &fileName, std::string &secondFileName) {
 	fstream file(fileName, ios::in | ios::binary);
 	if (file.fail())
 		return;
-	logicalFile.seekp(0, ios::beg);
+	file.seekp(0, ios::beg);
 	while (!file.eof()) {
-		T key;
+		int key;
 		int value;
 		file.read((char*)&key, '|');
 		file.read((char*)&value, '|');
-		add(key, value);
+		primary_keys[key].insert(value);
+
+	}
+	file.close();
+	file.open(secondFileName, ios::in | ios::binary);
+	if (file.fail())
+		return;
+	file.seekp(0, ios::beg);
+	while (!file.eof()) {
+		string key;
+		int value;
+		file.read((char*)&key, '|');
+		file.read((char*)&value, '|');
+		secondary_keys[key].insert(value);
 	}
 	file.close();
 }
 
-template<class T>
-void index<T>::add(T key, int val) {
-	keys[key].insert(values);
-}
-
-template<class T>
-void index<T>::update(T key, int old_val, int new_val) {
-	if (keys[key].find(old_val) != keys[key].end())
-		keys[key].erase(keys[key].find(old_val));
-
-	keys[key].insert(new_val);
-}

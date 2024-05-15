@@ -10,8 +10,8 @@ Entity::~Entity() { save_files(); }
 Entity::Entity(Entity& other) : id(other.id)
 {
     strcpy_s(name, other.name);
-    primary_index = other.primary_index;
-    secondary_index = other.secondary_index;
+    indexes.primary_keys = other.indexes.primary_keys;
+    indexes.secondary_keys = other.indexes.secondary_keys;
     Avail_List = other.Avail_List;  
 }
 
@@ -19,7 +19,7 @@ void Entity::Add()
 {
     
     LogicalFile.open(file_name, ios::in | ios::out | ios::binary);
-    int offset = FirstFit(Size());
+    int offset = BestFit(Size());
 
     if (offset == -1)
     {
@@ -28,6 +28,8 @@ void Entity::Add()
     }
     LogicalFile.seekp(offset, ios::beg);
     Write();
+    indexes.primary_keys[id].insert(offset);
+    indexes.secondary_keys[string(name)].insert(id);
     LogicalFile.close();
 }
 
@@ -58,9 +60,10 @@ int Entity::Delete(int id)
     LogicalFile.seekp(pos, ios::beg);
     LogicalFile.put('*');
     LogicalFile.close();
-    Avail_List.push_back(AvailList(Size(), pos));
-    primary_index.keys.erase(id);
-    secondary_index.keys[name].erase(id);
+    Avail_List.push_back(AvailList(Count(pos), pos));
+    indexes.primary_keys.erase(id);
+    indexes.secondary_keys[name].erase(id);
+    return 1;
 }
 
 void Entity::load_files()
@@ -74,8 +77,7 @@ void Entity::load_files()
     else
         LogicalFile.close();
 
-    primary_index.read(primary_file_name);
-    secondary_index.read(secondary_file_name);
+    indexes.read(primary_file_name, secondary_file_name);
     LogicalFile.open(deleted_file_name, ios::in | ios::out | ios::binary);
     if (LogicalFile.is_open())
     {
@@ -92,46 +94,50 @@ void Entity::load_files()
 
 void Entity::save_files()
 {
-    primary_index.write(primary_file_name);
+    indexes.write(primary_file_name, secondary_file_name);
 
-    secondary_index.write(secondary_file_name);
 
     LogicalFile.open(deleted_file_name, ios::out | ios::binary);
     for (auto i : Avail_List)
     {
         LogicalFile.write((char*)&i.offset, sizeof(i.offset));
         LogicalFile.write((char*)&i.sz, sizeof(i.sz));
-    }
+    }  
     LogicalFile.close();
 }
 
-int Entity::FirstFit(int size)
+int Entity::BestFit(int size)
 {
     int pos = -1;
+    int ind;
     int mn = 1e9;
     for (int i = 0; i < Avail_List.size(); i++)
     {
         if (Avail_List[i].sz >= size && Avail_List[i].sz < mn)
         {
             mn = Avail_List[i].sz;
+            ind = i;
             pos = Avail_List[i].offset;
         }
     }
+    if (pos != -1)
+        Avail_List.erase(Avail_List.begin() + ind);
+
     return pos;
 }
 
-int Entity::ReturnPosition(int)
+int Entity::ReturnPosition(int id)
 {
-	if (primary_index.keys.find(id) == primary_index.keys.end())
+	if (indexes.primary_keys.find(id) == indexes.primary_keys.end())
     {
 		return -1;
 	}
-	return *primary_index.keys[id].begin();
+	return *indexes.primary_keys[id].begin();
 }
 
 set<int>& Entity::ReturnPosition(char name[20])
 {
-    return secondary_index.keys[string(name)];
+    return indexes.secondary_keys[string(name)];
 }
 
 void Entity::Write()
@@ -146,6 +152,7 @@ void Entity::Read()
 
 int Entity::Size()
 {
+    return 7;
 }
 
 
@@ -157,4 +164,19 @@ void Entity::Name(char name[20])
 void Entity::Id(int id)
 {
     this->id = id;
+}
+
+int Entity::Count(int offset)
+{
+    string s;
+    LogicalFile.seekg(offset, ios::beg);
+    LogicalFile.get();
+    streamsize sz = 0;
+    LogicalFile.getline((char *) &s, sz, '$');
+    int r = LogicalFile.tellg();
+    LogicalFile.seekg(offset, ios::beg);
+    LogicalFile.get();
+    LogicalFile.getline((char *) &s, sz, '*');
+    r = min(r, (int)LogicalFile.tellg());
+    return (r - offset);
 }

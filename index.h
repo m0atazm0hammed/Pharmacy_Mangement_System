@@ -3,17 +3,15 @@
 #include<string>
 #include <set>
 using namespace std;
-template<class T>
-class index
+class indx
 {
 
 public:
-	index();
-	std::map<T, set<int>> keys;
-	void write(std::string&);
-	void read(std::string&);
-	void add(T, int);
-	void update(T, int, int);
+	indx();
+	std::map<int, set<int>> primary_keys;
+	std::map<string, set<int>> secondary_keys;
+	void write(std::string&, std::string&);
+	void read(std::string&, std::string&);
 };
 
 
