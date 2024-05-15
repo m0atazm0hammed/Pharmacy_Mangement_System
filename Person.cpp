@@ -1,10 +1,11 @@
 #include "Person.h"
 #include <fstream>
+#include "Entity.h"
 #include "index.h"
 using namespace std;
 
 
-Person::Person()
+Person::Person() 
 {
 	id = -1;
 	name[0] = phone_num[0] = '\0';

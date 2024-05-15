@@ -49,7 +49,6 @@ void SearchMedicine::OnSearchById(wxCommandEvent &event)
 		wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
 		wxMessageBox("Medicine found", "Success", wxOK | wxICON_INFORMATION);
 	}
-	Close();
 }
 
 void SearchMedicine::OnSearchByName(wxCommandEvent &event)
@@ -58,7 +57,6 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 	std::string name = wxName.ToStdString();
 	Product product;
 	set<int> offset = product.ReturnPosition(name);
-	std::cerr << offset.size() << std::endl;
 	if (offset.empty())
 	{
 		wxMessageBox("Medicine not found", "Error", wxOK | wxICON_ERROR);
@@ -71,8 +69,8 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 		{
 			product.LogicalFile.seekg(product.ReturnPosition(*i));
 			product.Read();
-			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
-			wxMessageBox("Medicine found", "Success", wxOK | wxICON_INFORMATION);
+			wxString msg = "Medicine found\nID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
+			wxMessageBox(msg, "Success", wxOK | wxICON_INFORMATION);
 		}
 	}
 	

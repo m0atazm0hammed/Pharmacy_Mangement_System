@@ -73,6 +73,7 @@ int Entity::Delete(int id)
 
 void Entity::load_files()
 {
+    std::cerr << file_name << std::endl;
     LogicalFile.open(file_name, ios::in | ios::out | ios::binary);
     if (!LogicalFile.is_open())
     {
@@ -82,8 +83,10 @@ void Entity::load_files()
     else
         LogicalFile.close();
     LogicalFile.clear();
+    std::cerr << primary_file_name << std::endl << secondary_file_name << std::endl;
     indexes.read(primary_file_name, secondary_file_name);
     LogicalFile.clear();
+    std::cerr << deleted_file_name << std::endl;
     LogicalFile.open(deleted_file_name, ios::in | ios::out | ios::binary);
     if (LogicalFile.is_open())
     {
@@ -148,7 +151,6 @@ int Entity::ReturnPosition(int id)
 
 set<int> Entity::ReturnPosition(string name)
 {
-    std::cerr << indexes.secondary_keys.size() << std::endl;
     if (indexes.secondary_keys.find(name) == indexes.secondary_keys.end())
     {
         return set<int>();

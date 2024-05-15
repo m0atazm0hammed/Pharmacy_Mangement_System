@@ -2,16 +2,23 @@
 
 Employee::Employee() : Person(), salary(-1)
 {
-    strcpy_s(shift, "");
+shift[0] = '\0';
+    primary_file_name = "employee01.txt", secondary_file_name = "employee02.txt",
+				file_name = "employee00.txt", deleted_file_name = "employeeAvail.txt";
+    load_files();
 }
 
 Employee::Employee(int id, char name[20], char phone_num[20], int salary, char shift[20]) : Person(id, name, phone_num), salary(salary)
 {
     strcpy_s(this->shift, shift);
+    primary_file_name = "employee01.txt", secondary_file_name = "employee02.txt",
+				file_name = "employee00.txt", deleted_file_name = "employeeAvail.txt";
+    load_files();
 }
 
 Employee::Employee(Employee &other) : Person(other), salary(other.salary)
 {
+    load_files();
     strcpy_s(shift, other.shift);
 }
 

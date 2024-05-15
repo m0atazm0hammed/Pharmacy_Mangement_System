@@ -5,6 +5,7 @@
 #include "DeleteMedicine.h"
 #include "MainFrame.h"
 #include "SearchMedicine.h"
+#include "AddMedicine.h"
 Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, title,
 	wxPoint(30, 30), wxSize(1280, 720))
 {
@@ -47,7 +48,7 @@ Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, titl
 
 void Menu::OnAdd(wxCommandEvent& event)
 {
-    auto frame = new AddEmployeeFrame("Add Medicine", wxDefaultPosition, wxSize(300, 200));
+    auto frame = new AddEmployeeFrame("Add Employee", wxPoint(30, 30), wxSize(800, 600));
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);

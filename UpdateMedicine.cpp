@@ -2,18 +2,55 @@
 #include<wx/spinctrl.h>
 #include<wx/wx.h>
 #include "MainFrame.h"
+#include "Product.h"
 UpdateMedicine::UpdateMedicine(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Update Medicine") {
-	SetFont(GetFont().Scale(1.5));
-	wxPanel* panel = new wxPanel(this);
+	wxPanel* panel = new wxPanel(this, wxID_ANY);
+    wxFont boldFont(wxFontInfo(12).Bold());
+    wxStaticText* IdLabel = new wxStaticText(panel, wxID_ANY, wxT("Id:"));
+    IdLabel->SetFont(boldFont);
+    wxStaticText* PriceLabel = new wxStaticText(panel, wxID_ANY, wxT("Price:"));
+    PriceLabel->SetFont(boldFont);
+    wxStaticText* StockLabel = new wxStaticText(panel, wxID_ANY, wxT("Stock:"));
+    StockLabel->SetFont(boldFont);
+    wxStaticText* SizeLabel = new wxStaticText(panel, wxID_ANY, wxT("Size:"));
+    SizeLabel->SetFont(boldFont);
+    IdTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
+    PriceTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
+    StockTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
+    SizeTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
+    wxButton* UpdateButton = new wxButton(panel, wxID_ANY, wxT("Update"), wxDefaultPosition, wxSize(200, 50)); // Larger size
+    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    sizer->Add(IdLabel, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(IdTextCtrl, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(PriceLabel, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(PriceTextCtrl, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(StockLabel, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(StockTextCtrl, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(SizeLabel, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(SizeTextCtrl, 0, wxEXPAND | wxALL, 5);
+    sizer->Add(UpdateButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+    panel->SetSizer(sizer);
 
+    UpdateButton->Bind(wxEVT_BUTTON, &UpdateMedicine::OnUpdate, this);  
+    Centre();
+}
 
-	wxStaticText* statictext = new wxStaticText(panel, wxID_ANY, " Enter Name : ", wxPoint(343, 150));
-	wxTextCtrl* textctrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 190), wxSize(200, -1));
-	wxStaticText* statictext1 = new wxStaticText(panel, wxID_ANY, " Enter ID : ", wxPoint(343, 250));
-	wxTextCtrl* textctrl1 = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
-	wxStaticText* statictext2 = new wxStaticText(panel, wxID_ANY, " Quantity : ", wxPoint(343, 350));
-	wxSpinCtrl* spinctrl = new wxSpinCtrl(panel, wxID_ANY,"", wxPoint(300, 390), wxSize(200, -1));	//Quantity
-	wxButton* button = new wxButton(panel, wxID_ANY, "Update", wxPoint(300, 490), wxSize(200, -1));
+void UpdateMedicine::OnUpdate(wxCommandEvent &event)
+{
+	wxString wxId = IdTextCtrl->GetValue();
+	int id = std::stoi(wxId.ToStdString());
+	wxString wxPrice = PriceTextCtrl->GetValue();
+	int price = std::stoi(wxPrice.ToStdString());
+	wxString wxStock = StockTextCtrl->GetValue();
+	int stock = std::stoi(wxPrice.ToStdString());
+	wxString wxSize = SizeTextCtrl->GetValue();
+	int size = std::stoi(wxSize.ToStdString());
 
-		
+	Product product;
+	product.id = id;
+	product.price = price;
+	product.stock = stock;
+	product.size = size;
+	product.Update(id);
+	wxMessageBox("Medicine updated", "Success", wxOK | wxICON_INFORMATION);
 }
