@@ -10,6 +10,7 @@ AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Phar
 	wxTextCtrl* textctrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 190), wxSize(200, -1));
 	wxStaticText* statictext1 = new wxStaticText(panel, wxID_ANY, " Enter ID : ", wxPoint(343, 250));
 	wxTextCtrl* textctrl1 = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
+	wxButton* button = new wxButton(panel, wxID_ANY, "Add", wxPoint(300, 390), wxSize(200, -1));
 	
 	
 

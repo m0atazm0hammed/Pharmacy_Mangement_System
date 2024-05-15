@@ -13,5 +13,6 @@ UpdateMedicine::UpdateMedicine(const wxString& title) :wxFrame(nullptr, wxID_ANY
 	wxTextCtrl* textctrl1 = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
 	wxStaticText* statictext2 = new wxStaticText(panel, wxID_ANY, " Quantity : ", wxPoint(343, 350));
 	wxSpinCtrl* spinctrl = new wxSpinCtrl(panel, wxID_ANY,"", wxPoint(300, 390), wxSize(200, -1)); //Quantity
+	wxButton* button = new wxButton(panel, wxID_ANY, "Update", wxPoint(300, 490), wxSize(200, -1));
 
 }
