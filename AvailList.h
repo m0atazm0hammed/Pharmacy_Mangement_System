@@ -5,6 +5,5 @@ public:
 	int sz, offset;
 	AvailList();
 	AvailList(int, int);
-	AvailList(const AvailList&);
+	AvailList(const AvailList &);
 };
-

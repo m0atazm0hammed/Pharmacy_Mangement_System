@@ -7,4 +7,4 @@ AvailList::AvailList()
 
 AvailList::AvailList(int sz, int offset) : sz(sz), offset(offset) {}
 
-AvailList::AvailList(const AvailList& a) : AvailList(sz, offset) {}
+AvailList::AvailList(const AvailList &a) : AvailList(sz, offset) {}
