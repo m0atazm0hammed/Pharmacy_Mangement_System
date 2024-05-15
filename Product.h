@@ -3,6 +3,7 @@
 class Product : public Entity
 {
 public:
+	
 	int price, stock, size;
 	char exp_date[11];
 	Product();

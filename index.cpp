@@ -7,6 +7,8 @@
 
 indx::indx()
 {
+	primary_keys = {};
+	secondary_keys = {};
 }
 
 void indx::write(std::string &fileName, std::string &secondFileName)
@@ -21,6 +23,7 @@ void indx::write(std::string &fileName, std::string &secondFileName)
 		}
 	}
 	file.close();
+	file.clear();
 	file.open(secondFileName, ios::out | ios::trunc | ios::binary);
 	for (auto& [key, values] : secondary_keys) {
 		for (auto& value : values) {
@@ -47,6 +50,7 @@ void indx::read(std::string &fileName, std::string &secondFileName) {
 
 	}
 	file.close();
+	file.clear();
 	file.open(secondFileName, ios::in | ios::binary);
 	if (file.fail())
 		return;

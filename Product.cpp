@@ -5,11 +5,17 @@ Product::Product() : Entity()
 {
     price = stock = size = -1;
     strcpy_s(exp_date, "");
+    primary_file_name = "Proudct01.txt", secondary_file_name = "Proudct02.txt",
+    file_name = "Proudct00.txt", deleted_file_name = "ProudctAvail.txt";
+    load_files();
 }
 
 Product::Product(int id, char name[20], int price, int stock, int size, char exp_date[11]) : Entity(id, name), price(price), stock(stock), size(size)
 {
     strcpy_s(this->exp_date, exp_date);
+    primary_file_name = "Proudct01.txt", secondary_file_name = "Proudct02.txt",
+    file_name = "Proudct00.txt", deleted_file_name = "ProudctAvail.txt";
+    load_files();
 }
 
 Product::Product(Product &other) : Entity(other), price(other.price), stock(other.stock), size(other.size)

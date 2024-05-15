@@ -1,10 +1,10 @@
 #include "Entity.h"
+#include <iostream>
 
-Entity::Entity() : id(-1), name("") { load_files(); }
+Entity::Entity() : id(-1), name("") { }
 Entity::Entity(int id, char name[20]) : id(id)
 { 
     strcpy_s(this->name, name);
-    load_files(); 
 }
 Entity::~Entity() { save_files(); }
 Entity::Entity(Entity& other) : id(other.id)
@@ -76,8 +76,9 @@ void Entity::load_files()
     }
     else
         LogicalFile.close();
-
+    LogicalFile.clear();
     indexes.read(primary_file_name, secondary_file_name);
+    LogicalFile.clear();
     LogicalFile.open(deleted_file_name, ios::in | ios::out | ios::binary);
     if (LogicalFile.is_open())
     {
@@ -96,6 +97,7 @@ void Entity::save_files()
 {
     indexes.write(primary_file_name, secondary_file_name);
 
+    LogicalFile.clear();
 
     LogicalFile.open(deleted_file_name, ios::out | ios::binary);
     for (auto i : Avail_List)
@@ -128,6 +130,7 @@ int Entity::BestFit(int size)
 
 int Entity::ReturnPosition(int id)
 {
+        
 	if (indexes.primary_keys.find(id) == indexes.primary_keys.end())
     {
 		return -1;
@@ -135,9 +138,14 @@ int Entity::ReturnPosition(int id)
 	return *indexes.primary_keys[id].begin();
 }
 
-set<int>& Entity::ReturnPosition(char name[20])
+set<int> Entity::ReturnPosition(string name)
 {
-    return indexes.secondary_keys[string(name)];
+    std::cerr << indexes.secondary_keys.size() << std::endl;
+    if (indexes.secondary_keys.find(name) == indexes.secondary_keys.end())
+    {
+        return set<int>();
+    }
+    return indexes.secondary_keys[name];
 }
 
 void Entity::Write()

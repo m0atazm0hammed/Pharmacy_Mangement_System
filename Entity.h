@@ -31,7 +31,7 @@ public:
 	int Delete(int);
 
 	int ReturnPosition(int);
-	set<int> &ReturnPosition(char[20]);
+	set<int> ReturnPosition(string);
 
 	int BestFit(int);
 	void load_files();

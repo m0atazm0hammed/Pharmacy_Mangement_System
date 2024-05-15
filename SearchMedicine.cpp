@@ -15,8 +15,8 @@ SearchMedicine::SearchMedicine(const wxString &title) : wxFrame(nullptr, wxID_AN
 	textctrl1 = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
 	searchById = new wxButton(panel, wxID_ANY, "Search", wxPoint(350, 320), wxSize(100, 30));
 
-	searchByName->Bind(wxEVT_BUTTON, &SearchMedicine::OnSearchById, this);
-	searchById->Bind(wxEVT_BUTTON, &SearchMedicine::OnSearchByName, this);
+	searchById->Bind(wxEVT_BUTTON, &SearchMedicine::OnSearchById, this);
+	searchByName->Bind(wxEVT_BUTTON, &SearchMedicine::OnSearchByName, this);
 
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddStretchSpacer();
@@ -50,4 +50,30 @@ void SearchMedicine::OnSearchById(wxCommandEvent &event)
 		wxMessageBox("Medicine found", "Success", wxOK | wxICON_INFORMATION);
 	}
 	Close();
+}
+
+void SearchMedicine::OnSearchByName(wxCommandEvent &event)
+{
+	wxString wxName = textctrl->GetValue();
+	std::string name = wxName.ToStdString();
+	Product product;
+	set<int> offset = product.ReturnPosition(name);
+	std::cerr << offset.size() << std::endl;
+	if (offset.empty())
+	{
+		wxMessageBox("Medicine not found", "Error", wxOK | wxICON_ERROR);
+	}
+	else
+	{
+		
+		int cnt = 0;
+		for (auto i = offset.begin(); i != offset.end() && cnt < 5; i++, cnt++)
+		{
+			product.LogicalFile.seekg(product.ReturnPosition(*i));
+			product.Read();
+			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
+			wxMessageBox("Medicine found", "Success", wxOK | wxICON_INFORMATION);
+		}
+	}
+	
 }

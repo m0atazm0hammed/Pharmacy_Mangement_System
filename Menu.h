@@ -8,5 +8,5 @@ public:
 	void OnAdd(wxCommandEvent& event);
 	void OnUpdate(wxCommandEvent& event);
 	void OnDelete(wxCommandEvent& event);
-
+	void OnSearch(wxCommandEvent& event);
 };
