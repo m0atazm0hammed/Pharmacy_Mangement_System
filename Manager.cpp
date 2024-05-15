@@ -6,6 +6,7 @@ Manager::Manager(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Ma
 {
 	SetFont(GetFont().Scale(1.5));
 	wxPanel* panel = new wxPanel(this);
+	wxBoxSizer* vbox = new wxBoxSizer(wxVERTICAL);
 	
 	wxArrayString choices;
 	choices.Add("Product");
@@ -23,8 +24,18 @@ Manager::Manager(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Ma
 	choices1.Add("Employee");
 	choices1.Add("Customer");
 
+
+
+
 	wxStaticText* statictext2 = new wxStaticText(panel, wxID_ANY, " Delete : ", wxPoint(370, 350));
 	wxButton* button = new wxButton(panel, wxID_ANY, "Employee", wxPoint(200, 390), wxSize(400, -1));
+	// Set up the layout
+	vbox->Add(statictext, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	vbox->Add(choice, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	vbox->Add(statictext1, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	vbox->Add(choice1, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	vbox->Add(statictext2, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	vbox->Add(button, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
 
 
 	
