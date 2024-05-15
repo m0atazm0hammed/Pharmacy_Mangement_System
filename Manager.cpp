@@ -1,7 +1,8 @@
 #include "Manager.h"
 #include<wx/wx.h>
 #include "MainFrame.h"
-Manager::Manager(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Manager")
+Manager::Manager(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Manager",
+	wxPoint(30, 30), wxSize(1280, 720))
 {
 	SetFont(GetFont().Scale(1.5));
 	wxPanel* panel = new wxPanel(this);
