@@ -2,6 +2,6 @@
 #include <stack>
 class MyApp : public wxApp {
 public:
-    stack<wxFrame*> frames;
+    static stack<wxFrame*> frames;
     bool OnInit() ;
 };

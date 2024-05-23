@@ -41,7 +41,7 @@ void LoginChoiceFrame::OnManagerButton(wxCommandEvent& event) {
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    frames.push(this);
+    MyApp::frames.push(this);
     this->Show(false);
 }
 void LoginChoiceFrame::OnEmployeeButton(wxCommandEvent& event) {
