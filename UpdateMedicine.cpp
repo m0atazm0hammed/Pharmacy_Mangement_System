@@ -51,6 +51,9 @@ void UpdateMedicine::OnUpdate(wxCommandEvent &event)
 	product.price = price;
 	product.stock = stock;
 	product.size = size;
-	product.Update(id);
-	wxMessageBox("Medicine updated", "Success", wxOK | wxICON_INFORMATION);
+	int ret = product.Update(id, price, stock, size);
+	if (ret)
+        wxMessageBox("Updated Seccessfully");
+    else
+        wxMessageBox("Update Failed");
 }

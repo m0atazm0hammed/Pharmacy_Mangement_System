@@ -46,11 +46,11 @@ void Product::Read()
     streamsize sz = 0;
     LogicalFile.get();
     LogicalFile.read((char*)&id, sizeof(id));
-    LogicalFile.getline(name, sz, '|');
+    LogicalFile.getline(name, 20, '|');
     LogicalFile.read((char*)&price, sizeof(price));
     LogicalFile.read((char*)&stock, sizeof(stock));
     LogicalFile.read((char*)&size, sizeof(size));
-    LogicalFile.getline(exp_date, sz, '|');
+    LogicalFile.getline(exp_date, 20, '|');
 }
 
 int Product::Size()
@@ -76,4 +76,64 @@ void Product::Size(int size)
 void Product::Exp_date(char exp_date[11])
 {
     strcpy_s(this->exp_date, exp_date);
+}
+
+
+
+void Product::Add()
+{
+
+    LogicalFile.open(file_name, ios::in | ios::out | ios::binary);
+    int offset = BestFit(Size());
+
+    if (offset == -1)
+    {
+        LogicalFile.seekp(0, ios::end);
+        offset = LogicalFile.tellp();
+    }
+    else
+        LogicalFile.seekp(offset, ios::beg);
+    Write();
+    indexes.primary_keys[id].insert(offset);
+    indexes.secondary_keys[string(name)].insert(id);
+    LogicalFile.close();
+}
+
+int Product::Update(int id, int price, int stock, int size)
+{
+    int pos = ReturnPosition(id);
+    if (pos == -1)
+    {
+        return 0;
+    }
+    LogicalFile.open(file_name, ios::binary | ios::in | ios::out);
+    LogicalFile.seekg(pos, ios::beg);
+    Read();
+    LogicalFile.seekp(pos, ios::beg);
+    this->price = price;
+    this->stock = stock;
+    this->size = size;
+    Write();
+    LogicalFile.close();
+    return 1;
+}
+
+
+int Product::Delete(int id)
+{
+    int pos = ReturnPosition(id);
+    if (pos == -1)
+    {
+        return 0;
+    }
+    LogicalFile.open(file_name, ios::in | ios::out | ios::binary);
+    LogicalFile.seekg(pos, ios::beg);
+    Read();
+    LogicalFile.seekp(pos, ios::beg);
+    LogicalFile.put('*');
+    LogicalFile.close();
+    Avail_List.push_back(AvailList(Count(pos), pos));
+    indexes.primary_keys.erase(id);
+    indexes.secondary_keys[name].erase(id);
+    return 1;
 }

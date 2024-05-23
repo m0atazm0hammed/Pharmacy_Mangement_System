@@ -40,27 +40,20 @@ AddEmployeeFrame::AddEmployeeFrame(const wxString& title, const wxPoint& pos, co
 }
 
 void AddEmployeeFrame::OnAdd(wxCommandEvent& event) {
-    char name[20];
-    std::cerr<< "1" << '\n';
-    strcpy(name, nameTextCtrl->GetValue().ToStdString().c_str());
-    std::cerr<< "1" << '\n';
-    char phone [20];
-    strcpy(phone,phoneTextCtrl->GetValue().ToStdString().c_str());
-    std::cerr<< "1" << '\n';
+    Employee emp;
+    wxString wxName = nameTextCtrl->GetValue();
+	std::string name = wxName.ToStdString();
+	strcpy(emp.name, name.c_str());
+    wxString wxPhone = phoneTextCtrl->GetValue();
+    std::string phone = wxPhone.ToStdString();
+    strcpy(emp.phone_num, phone.c_str());
     std::string salary = salaryTextCtrl->GetValue().ToStdString();
     char shiftt[20] ;
-    std::cerr<< "1" << '\n';
     strcpy(shiftt,  shiftTextCtrl->GetValue().ToStdString().c_str());
-    std::cerr<< "1" << '\n';
-    Employee emp;
-    std::cerr<< "1" << '\n';
 	wxString wxId = IdTextCtrl->GetValue();
-    std::cerr<< "1" << '\n';
 	int id = std::stoi(wxId.ToStdString());
     int sal = std::stoi(salary);
-    emp.Id(id);
-    emp.Name(name);
-    emp.Phone_num(phone);
+    emp.id = id;
     emp.Salary(sal);
     emp.Shift(shiftt);
     emp.Add();

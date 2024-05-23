@@ -56,7 +56,7 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 	wxString wxName = textctrl->GetValue();
 	std::string name = wxName.ToStdString();
 	Product product;
-	set<int> offset = product.ReturnPosition(name);
+	set<int> offset = product.ReturnPosition((char *)name.c_str());
 	if (offset.empty())
 	{
 		wxMessageBox("Medicine not found", "Error", wxOK | wxICON_ERROR);

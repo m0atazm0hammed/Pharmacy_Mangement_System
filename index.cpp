@@ -30,9 +30,9 @@ void indx::write(std::string &fileName, std::string &secondFileName)
 	{
 		for (auto &value : values)
 		{
-			file.write((char *)&key, key.size());
+			file.write(key.c_str(), key.size());
 			file.put('|');
-			file.write((char *)&value, sizeof(value));
+			file.write(reinterpret_cast<const char *>(&value), sizeof(value));
 			file.put('|');
 		}
 	}
@@ -44,12 +44,10 @@ void indx::read(std::string &fileName, std::string &secondFileName)
 	fstream file(fileName, ios::in | ios::binary);
 	if (file.fail())
 		return;
-	std::cerr << 'g' << std::endl;
 	file.seekg(0, ios::end);
 	int size = file.tellg();
 	file.clear();
 	file.seekg(0, ios::beg);
-	std::cerr << file.tellg() << std::endl;
 	while (file.tellg() < size && !file.eof())
 	{
 		int key;
@@ -61,7 +59,6 @@ void indx::read(std::string &fileName, std::string &secondFileName)
 		file.get();
 		primary_keys[key].insert(value);
 	}
-	std::cerr << 'g' << std::endl;
 	file.close();
 	file.open(secondFileName, ios::in | ios::binary);
 	if (file.fail())
@@ -71,20 +68,15 @@ void indx::read(std::string &fileName, std::string &secondFileName)
 
 	file.clear();
 	file.seekg(0, ios::beg);
-	std::cerr << 'g' << std::endl;
 
 	while (file.tellg() < size && !file.eof())
 	{
-		string key;
+		char key[20];
 		int value;
-		streamsize sz = 0;
-		file.getline((char *)&key, sz, '|');
+		file.getline(key, 20, '|');
 		file.read((char *)&value, sizeof(value));
 		file.get();
-		std::cerr << key << std::endl << value << std::endl;
 		secondary_keys[key].insert(value);
-		break;
 	}
-	std::cerr << 'g' << std::endl;
 	file.close();
 }

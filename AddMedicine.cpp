@@ -40,7 +40,7 @@ void AddMedicine::OnAdd(wxCommandEvent& event)
 	product.price = 0;
 	product.stock = 0;
 	product.size = 0;
-	strcpy(product.exp_date, "00-00-0000");
+	strcpy(product.exp_date, "15-05-2025");
 	product.Add();
 	wxMessageBox("Medicine added", "Success", wxOK | wxICON_INFORMATION);
 }

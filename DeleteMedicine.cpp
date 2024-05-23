@@ -26,6 +26,9 @@ void DeleteMedicine::OnDelete(wxCommandEvent &event)
 	int id = std::stoi(wxId.ToStdString());
 
 	Product product;
-	product.Delete(id);
-	wxMessageBox("Medicine deleted", "Success", wxOK | wxICON_INFORMATION);
+	int tmp = product.Delete(id);
+    if (tmp)
+	    wxMessageBox("Medicine deleted", "Success", wxOK | wxICON_INFORMATION);
+    else
+        wxMessageBox("Medicine not found");
 }

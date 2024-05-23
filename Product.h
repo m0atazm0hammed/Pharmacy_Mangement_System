@@ -14,6 +14,9 @@ public:
 	void Write();
 	int Size();
 	void Read();
+	void Add();
+	int Delete(int);
+	int Update(int, int, int, int);
 
 	void Price(int price);
 	void Stock(int stock);

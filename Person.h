@@ -4,7 +4,7 @@
 
 class Person : public Entity
 {
-	protected:
+	public:
 		int id;
 		char name[20], phone_num[20];
 	public:
@@ -12,6 +12,8 @@ class Person : public Entity
 		Person(int id, char name1[20], char phone_num1[50]);
 		~Person();
 		Person(Person &other);
+
+		int Update(int id);
 
 
 		void Write();

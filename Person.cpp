@@ -44,8 +44,8 @@ void Person::Read()
     streamsize sz = 0;
     LogicalFile.get();
     LogicalFile.read((char*)&id, sizeof(id));
-    LogicalFile.getline(name, sz, '|');
-    LogicalFile.getline(phone_num, sz, '|');
+    LogicalFile.getline(name, 20, '|');
+    LogicalFile.getline(phone_num, 20, '|');
 }
 
 int Person::Size()
@@ -57,3 +57,4 @@ void Person::Phone_num(char phone_num[20])
 {
     strcpy_s(this->phone_num, phone_num);
 }
+

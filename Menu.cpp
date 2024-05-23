@@ -5,6 +5,7 @@
 #include "DeleteMedicine.h"
 #include "MainFrame.h"
 #include "SearchMedicine.h"
+#include "UpdateEmployeeFrame.h"
 #include "AddMedicine.h"
 Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, title,
 	wxPoint(30, 30), wxSize(1280, 720))
@@ -37,24 +38,24 @@ Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, titl
 
     // Set the sizer for the panel
     panel->SetSizer(sizer);
-    addButton->Bind(wxEVT_BUTTON, &Menu::OnAdd, this);
-    updateButton->Bind(wxEVT_BUTTON, &Menu::OnUpdate, this);
-    deleteButton->Bind(wxEVT_BUTTON, &Menu::OnDelete, this);
-    searchButton->Bind(wxEVT_BUTTON, &Menu::OnSearch, this);
+    addButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnAddEmployee : &Menu::OnAddProduct, this);
+    updateButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnUpdateEmployee : &Menu::OnUpdateProduct, this);
+    deleteButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnDeleteEmployee : &Menu::OnDeleteProduct, this);
+    searchButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnSearchEmployee : &Menu::OnSearchProduct, this);
     // Center the panel in the frame
     Centre();
 	
 }
 
-void Menu::OnAdd(wxCommandEvent& event)
+void Menu::OnAddProduct(wxCommandEvent& event)
 {
-    auto frame = new AddEmployeeFrame("Add Employee", wxPoint(30, 30), wxSize(800, 600));
+    auto frame = new AddMedicine("Add Medicine");//, wxPoint(30, 30), wxSize(800, 600));
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
     Close();
 }
-void Menu::OnUpdate(wxCommandEvent& event)
+void Menu::OnUpdateProduct(wxCommandEvent& event)
 {
     auto frame = new UpdateMedicine("Update Medicine");
     frame->SetClientSize(800, 600);
@@ -62,7 +63,7 @@ void Menu::OnUpdate(wxCommandEvent& event)
     frame->Show(true);
     Close();
 }
-void Menu::OnDelete(wxCommandEvent& event)
+void Menu::OnDeleteProduct(wxCommandEvent& event)
 {
     auto frame = new DeleteMedicine("Delete Medicine");
     frame->SetClientSize(800, 600);
@@ -71,9 +72,44 @@ void Menu::OnDelete(wxCommandEvent& event)
     Close();
 }
 
-void Menu::OnSearch(wxCommandEvent& event)
+void Menu::OnSearchProduct(wxCommandEvent& event)
 {
     auto frame = new SearchMedicine("Search Medicine");
+    frame->SetClientSize(800, 600);
+    frame->Center();
+    frame->Show(true);
+    Close();
+}
+
+
+void Menu::OnAddEmployee(wxCommandEvent& event)
+{
+    auto frame = new AddEmployeeFrame("Add Employee", wxPoint(30, 30), wxSize(800, 600));
+    frame->SetClientSize(800, 600);
+    frame->Center();
+    frame->Show(true);
+    Close();
+}
+void Menu::OnUpdateEmployee(wxCommandEvent& event)
+{
+    auto frame = new UpdateEmployeeFrame("Update Employee", wxPoint(30, 30), wxSize(800, 600));
+    frame->SetClientSize(800, 600);
+    frame->Center();
+    frame->Show(true);
+    Close();
+}
+void Menu::OnDeleteEmployee(wxCommandEvent& event)
+{
+    auto frame = new DeleteMedicine("Delete Employee");
+    frame->SetClientSize(800, 600);
+    frame->Center();
+    frame->Show(true);
+    Close();
+}
+
+void Menu::OnSearchEmployee(wxCommandEvent& event)
+{
+    auto frame = new SearchMedicine("Search Employee");
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
