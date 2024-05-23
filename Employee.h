@@ -17,10 +17,6 @@ class Employee : public Person
         void Add();
         int Update(int, char[20], int, char[20]);
 
-        int ReturnPosition(int);
-        set<int> &ReturnPosition(char[20]);
-        int BestFit(int);
-
         void Salary(int salary);
         void Shift(char shift[20]);
 

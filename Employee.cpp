@@ -104,39 +104,3 @@ int Employee::Update(int id, char phone_num[20], int salary, char shift[20])
     LogicalFile.close();
     return 1;
 }
-
-
-
-int Employee::BestFit(int size)
-{
-    int pos = -1;
-    int ind;
-    int mn = 1e9;
-    for (int i = 0; i < Avail_List.size(); i++)
-    {
-        if (Avail_List[i].sz >= size && Avail_List[i].sz < mn)
-        {
-            mn = Avail_List[i].sz;
-            ind = i;
-            pos = Avail_List[i].offset;
-        }
-    }
-    if (pos != -1)
-        Avail_List.erase(Avail_List.begin() + ind);
-
-    return pos;
-}
-
-int Employee::ReturnPosition(int id)
-{
-	if (indexes.primary_keys.find(id) == indexes.primary_keys.end())
-    {
-		return -1;
-	}
-	return *indexes.primary_keys[id].begin();
-}
-
-set<int>& Employee::ReturnPosition(char name[20])
-{
-    return indexes.secondary_keys[string(name)];
-}

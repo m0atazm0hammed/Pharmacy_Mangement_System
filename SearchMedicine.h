@@ -3,7 +3,7 @@
 class SearchMedicine : public wxFrame
 
 {
-
+	
 private:
 	wxPanel *panel;
 	wxStaticText *statictext;
@@ -12,6 +12,7 @@ private:
 	wxTextCtrl *textctrl1;
 	wxButton *searchById;
 	wxButton *searchByName;
+	wxFont boldFont;
 
 public:
 	SearchMedicine(const wxString &title);

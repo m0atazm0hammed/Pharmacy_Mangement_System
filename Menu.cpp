@@ -66,7 +66,7 @@ void Menu::OnUpdateProduct(wxCommandEvent& event)
 void Menu::OnDeleteProduct(wxCommandEvent& event)
 {
     auto frame = new DeleteMedicine("Delete Medicine");
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     Close();
