@@ -41,7 +41,8 @@ void LoginChoiceFrame::OnManagerButton(wxCommandEvent& event) {
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    frames.push(this);
+    this->Show(false);
 }
 void LoginChoiceFrame::OnEmployeeButton(wxCommandEvent& event) {
     auto frame = new Menu("Employee Dashboard", false);
