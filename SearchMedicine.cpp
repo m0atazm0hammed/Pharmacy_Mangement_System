@@ -81,5 +81,4 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 		}
 		product.LogicalFile.close();
 	}
-	
 }

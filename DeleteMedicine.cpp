@@ -39,8 +39,8 @@ DeleteMedicine::DeleteMedicine(const wxString &title) : wxFrame(nullptr, wxID_AN
 
 void DeleteMedicine::OnDeleteByID(wxCommandEvent &event)
 {
-	wxString wxId = IdTextCtrl->GetValue();
-	int id = std::stoi(wxId.ToStdString());
+    wxString wxId = IdTextCtrl->GetValue();
+    int id = std::stoi(wxId.ToStdString());
 
 	Product product;
 	int tmp = product.Delete(id);

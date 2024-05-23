@@ -1,7 +1,6 @@
 #pragma once
 #include <wx/wx.h>
 class SearchMedicine : public wxFrame
-
 {
 	
 private:
