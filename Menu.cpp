@@ -6,6 +6,7 @@
 #include "MainFrame.h"
 #include "SearchMedicine.h"
 #include "UpdateEmployeeFrame.h"
+#include "MyApp.h"
 #include "AddMedicine.h"
 Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, title,
 	wxPoint(30, 30), wxSize(1280, 720))
@@ -24,6 +25,7 @@ Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, titl
 	deleteButton->SetFont(boldFont);
     wxButton* searchButton = new wxButton(panel, wxID_ANY, wxT("Search"), wxDefaultPosition, wxSize(250, 50));
     searchButton->SetFont(boldFont);
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
     
     // Create a vertical box sizer to hold the buttons
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -38,6 +40,7 @@ Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, titl
 
     // Set the sizer for the panel
     panel->SetSizer(sizer);
+    backButton->Bind(wxEVT_BUTTON, &Menu::OnBack, this);
     addButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnAddEmployee : &Menu::OnAddProduct, this);
     updateButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnUpdateEmployee : &Menu::OnUpdateProduct, this);
     deleteButton->Bind(wxEVT_BUTTON, manager ? &Menu::OnDeleteEmployee : &Menu::OnDeleteProduct, this);
@@ -113,5 +116,13 @@ void Menu::OnSearchEmployee(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
+    Close();
+}
+
+void Menu::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
     Close();
 }

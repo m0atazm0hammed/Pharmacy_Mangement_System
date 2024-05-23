@@ -2,6 +2,6 @@
 #include <stack>
 class MyApp : public wxApp {
 public:
-    static stack<wxFrame*> frames;
+    static std::stack<wxFrame*> frames;
     bool OnInit() ;
 };

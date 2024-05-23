@@ -5,6 +5,7 @@ class Menu : public wxFrame
 {
 public:
 	Menu(const wxString& title, bool manager);
+	void OnBack(wxCommandEvent& event);
 	void OnAddProduct(wxCommandEvent& event);
 	void OnAddEmployee(wxCommandEvent& event);
 	void OnUpdateProduct(wxCommandEvent& event);

@@ -12,3 +12,4 @@ bool MyApp::OnInit() {
     choiceFrame->Show(true);
     return true;
 }
+std::stack<wxFrame*> MyApp::frames;

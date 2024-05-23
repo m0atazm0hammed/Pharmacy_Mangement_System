@@ -20,4 +20,8 @@ class Employee : public Person
         void Salary(int salary);
         void Shift(char shift[20]);
 
-};
+        int ReturnPosition(int);
+        set<int> &ReturnPosition(char[20]);
+
+        int BestFit(int);
+};  

@@ -1,5 +1,6 @@
 #include <wx/wx.h>
 #include "MainFrame.h"
+#include "MyApp.h"
 #include "Menu.h"
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
@@ -19,7 +20,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     // Login button
     wxButton* loginButton = new wxButton(panel, wxID_ANY, wxT("Login"), wxPoint(50, 10), wxSize(150, 30));
-
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
     // Sizer to arrange the controls vertically
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     sizer->AddStretchSpacer(); // Add space to the top
@@ -32,6 +33,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     sizer->AddStretchSpacer(); // Add space to the bottom
     panel->SetSizer(sizer);
 
+    backButton->Bind(wxEVT_BUTTON, &MainFrame::OnBack, this);
 	loginButton->Bind(wxEVT_BUTTON, &MainFrame::Login, this);
     // Set the size of the frame
     sizer->Fit(this);
@@ -48,10 +50,19 @@ void MainFrame::Login(wxCommandEvent& event)
 		frame->SetClientSize(800, 600);
 		frame->Center();
 		frame->Show(true);
-		Close();
+        MyApp::frames.push(this);
+        Show(false);
 	}
 	else
 	{
 		wxMessageBox("Invalid username or password");
 	}
+}
+
+void MainFrame::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close();
 }

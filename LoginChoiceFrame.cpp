@@ -1,6 +1,7 @@
 #include "LoginChoiceFrame.h"
 #include "MainFrame.h"
 #include "Menu.h"
+#include "MyApp.h"
 
 LoginChoiceFrame::LoginChoiceFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     :wxFrame(NULL, wxID_ANY, title, pos, size) {
@@ -42,12 +43,13 @@ void LoginChoiceFrame::OnManagerButton(wxCommandEvent& event) {
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
-    this->Show(false);
+    Show(false);
 }
 void LoginChoiceFrame::OnEmployeeButton(wxCommandEvent& event) {
     auto frame = new Menu("Employee Dashboard", false);
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
