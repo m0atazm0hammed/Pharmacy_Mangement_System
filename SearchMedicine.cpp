@@ -38,16 +38,19 @@ void SearchMedicine::OnSearchById(wxCommandEvent &event)
 	int id = wxAtoi(wxId);
 	Product product;
 	int offset = product.ReturnPosition(id);
+	cerr << offset << endl;
 	if (offset == -1)
 	{
 		wxMessageBox("Medicine not found", "Error", wxOK | wxICON_ERROR);
 	}
 	else
 	{
+		product.LogicalFile.open(product.file_name, ios::in | ios::binary);
 		product.LogicalFile.seekg(offset);
 		product.Read();
 		wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
 		wxMessageBox("Medicine found", "Success", wxOK | wxICON_INFORMATION);
+		product.LogicalFile.close();
 	}
 }
 
@@ -57,21 +60,30 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 	std::string name = wxName.ToStdString();
 	Product product;
 	set<int> offset = product.ReturnPosition((char *)name.c_str());
+	for (auto it : offset)
+		cerr << it << endl;
 	if (offset.empty())
 	{
 		wxMessageBox("Medicine not found", "Error", wxOK | wxICON_ERROR);
 	}
 	else
 	{
-		
+		product.LogicalFile.open(product.file_name, ios::in | ios::binary);
 		int cnt = 0;
 		for (auto i = offset.begin(); i != offset.end() && cnt < 5; i++, cnt++)
 		{
 			product.LogicalFile.seekg(product.ReturnPosition(*i));
 			product.Read();
+			cerr << product.id << endl <<
+				product.name << endl << 
+				product.price << endl <<
+				product.stock << endl <<
+				product.size << endl <<
+				product.exp_date << endl;
 			wxString msg = "Medicine found\nID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
 			wxMessageBox(msg, "Success", wxOK | wxICON_INFORMATION);
 		}
+		product.LogicalFile.close();
 	}
 	
 }
