@@ -25,7 +25,7 @@ Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, titl
 	deleteButton->SetFont(boldFont);
     wxButton* searchButton = new wxButton(panel, wxID_ANY, wxT("Search"), wxDefaultPosition, wxSize(250, 50));
     searchButton->SetFont(boldFont);
-    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Logout"), wxPoint(10, 10), wxSize(150, 30));
     
     // Create a vertical box sizer to hold the buttons
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
