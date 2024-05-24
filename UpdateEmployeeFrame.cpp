@@ -1,5 +1,6 @@
 #include "UpdateEmployeeFrame.h"
 #include "Employee.h"
+#include "MyApp.h"
 
 UpdateEmployeeFrame::UpdateEmployeeFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     :wxFrame(NULL, wxID_ANY, title, pos, size) {
@@ -19,6 +20,9 @@ UpdateEmployeeFrame::UpdateEmployeeFrame(const wxString& title, const wxPoint& p
     shiftTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
     wxButton* AddButton = new wxButton(panel, wxID_ANY, wxT("Add"), wxDefaultPosition, wxSize(200, 50)); // Larger size
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+    wxButton* BackButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    sizer->AddStretchSpacer();
     sizer->Add(IdLabel, 0, wxEXPAND | wxALL, 5);
     sizer->Add(IdTextCtrl, 0, wxEXPAND | wxALL, 5);
     sizer->Add(phoneLabel, 0, wxEXPAND | wxALL, 5);
@@ -31,6 +35,7 @@ UpdateEmployeeFrame::UpdateEmployeeFrame(const wxString& title, const wxPoint& p
     panel->SetSizer(sizer);
 
     AddButton->Bind(wxEVT_BUTTON, &UpdateEmployeeFrame::OnUpdate, this);  
+    BackButton->Bind(wxEVT_BUTTON, &UpdateEmployeeFrame::OnBack, this);
     Centre();
 }
 
@@ -53,4 +58,12 @@ void UpdateEmployeeFrame::OnUpdate(wxCommandEvent& event) {
         wxMessageBox("Updated Seccessfully");
     else
         wxMessageBox("Update Failed");
+}
+
+void UpdateEmployeeFrame::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close(true);
 }
