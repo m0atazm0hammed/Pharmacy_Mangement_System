@@ -18,4 +18,5 @@ public:
 	void OnSearchById(wxCommandEvent &event);
     void OnBack(wxCommandEvent &event);
 	void OnSearchByName(wxCommandEvent &event);
+    wxDECLARE_EVENT_TABLE();
 };

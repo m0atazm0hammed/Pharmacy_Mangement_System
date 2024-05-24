@@ -3,6 +3,12 @@
 #include "MainFrame.h"
 #include "Product.h"
 #include "MyApp.h"
+
+
+wxBEGIN_EVENT_TABLE(AddMedicine, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Add Medicine") {
 	SetFont(GetFont().Scale(1.5));
 	 panel = new wxPanel(this);
@@ -60,5 +66,6 @@ void AddMedicine::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
+	MyApp::BackPress = true;
     Close();
 }

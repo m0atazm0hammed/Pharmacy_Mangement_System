@@ -10,5 +10,6 @@ private:
     wxTextCtrl* salaryTextCtrl;
     wxTextCtrl* shiftTextCtrl;
     wxTextCtrl* IdTextCtrl;
+    wxDECLARE_EVENT_TABLE();
 };
 

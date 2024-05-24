@@ -23,5 +23,6 @@ public:
 	void OnDeleteEmployeeID(wxCommandEvent& event);
 	DeleteEmployee(const wxString& title);
 
+    wxDECLARE_EVENT_TABLE();
 };
 

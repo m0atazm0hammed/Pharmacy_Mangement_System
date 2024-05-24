@@ -64,5 +64,6 @@ void MainFrame::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
+	MyApp::BackPress = true;
     Close();
 }

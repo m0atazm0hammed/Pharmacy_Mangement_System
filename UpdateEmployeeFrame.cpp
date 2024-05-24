@@ -2,6 +2,11 @@
 #include "Employee.h"
 #include "MyApp.h"
 
+
+wxBEGIN_EVENT_TABLE(UpdateEmployeeFrame, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 UpdateEmployeeFrame::UpdateEmployeeFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     :wxFrame(NULL, wxID_ANY, title, pos, size) {
     wxPanel* panel = new wxPanel(this, wxID_ANY);
@@ -65,5 +70,6 @@ void UpdateEmployeeFrame::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
+	MyApp::BackPress = true;
     Close(true);
 }

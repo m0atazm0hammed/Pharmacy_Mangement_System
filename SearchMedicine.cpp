@@ -3,6 +3,12 @@
 #include "MainFrame.h"
 #include "Product.h"
 #include "MyApp.h"
+
+
+wxBEGIN_EVENT_TABLE(SearchMedicine, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 SearchMedicine::SearchMedicine(const wxString& title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Search Medicine"), boldFont(wxFontInfo(12).Bold())
 {
 	panel = new wxPanel(this);
@@ -108,5 +114,6 @@ void SearchMedicine::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
+	MyApp::BackPress = true;
     Close(true);
 }

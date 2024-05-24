@@ -15,18 +15,22 @@ bool MyApp::OnInit() {
     return true;
 }
 std::stack<wxFrame*> MyApp::frames;
-
+bool MyApp::BackPress = false;
 
 
 
 void MyApp::OnClose(wxCloseEvent& event)
 {
-    std::cerr << "closed" << std::endl;
-    while (!MyApp::frames.empty())
+    if (!BackPress)
     {
-        auto frame = MyApp::frames.top();
-        MyApp::frames.pop();
-        frame->Close();
+        while (!MyApp::frames.empty())
+        {
+            auto frame = MyApp::frames.top();
+            MyApp::frames.pop();
+            frame->Close();
+        }
     }
+    else
+        BackPress = false;
     event.Skip();
 }

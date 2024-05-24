@@ -24,5 +24,6 @@ public:
     void OnBack(wxCommandEvent& event);
 	void OnDeleteMedicineID(wxCommandEvent& event);
 	DeleteMedicine(const wxString& title);
+    wxDECLARE_EVENT_TABLE();
 };
 

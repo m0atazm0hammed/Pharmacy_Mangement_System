@@ -3,6 +3,12 @@
 #include "MainFrame.h"
 #include "MyApp.h"
 #include "Product.h"
+
+
+wxBEGIN_EVENT_TABLE(DeleteMedicine, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 DeleteMedicine::DeleteMedicine(const wxString &title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Delete Medicine", wxDefaultPosition, wxSize(1280, 720)), boldFont(wxFontInfo(12).Bold())
 {
 	id = -1;
@@ -107,6 +113,7 @@ void DeleteMedicine::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
+	MyApp::BackPress = true;
     Close(true);
 }
 

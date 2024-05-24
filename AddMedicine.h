@@ -13,4 +13,5 @@ public:
 	AddMedicine(const wxString& title);
     void OnBack(wxCommandEvent& event);
 	void OnAdd(wxCommandEvent& event);
+    wxDECLARE_EVENT_TABLE();
 };

@@ -4,6 +4,12 @@
 #include "MainFrame.h"
 #include "MyApp.h"
 #include "Product.h"
+
+
+wxBEGIN_EVENT_TABLE(UpdateMedicine, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 UpdateMedicine::UpdateMedicine(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Update Medicine") {
 	wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxFont boldFont(wxFontInfo(12).Bold());
@@ -68,5 +74,6 @@ void UpdateMedicine::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
+	MyApp::BackPress = true;
     Close(true);
 }

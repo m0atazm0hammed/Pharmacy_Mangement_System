@@ -3,6 +3,12 @@
 #include "MainFrame.h"
 #include "MyApp.h"
 #include "Employee.h"
+
+
+wxBEGIN_EVENT_TABLE(DeleteEmployee, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 DeleteEmployee::DeleteEmployee(const wxString& title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Delete Employee", wxDefaultPosition, wxSize(1280, 720)), boldFont(wxFontInfo(12).Bold())
 {
 	id = -1;
@@ -109,6 +115,7 @@ void DeleteEmployee::OnBack(wxCommandEvent& event)
 	auto frame = MyApp::frames.top();
 	frame->Show(true);
 	MyApp::frames.pop();
+	MyApp::BackPress = true;
 	Close(true);
 }
 

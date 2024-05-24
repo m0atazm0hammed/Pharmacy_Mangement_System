@@ -9,4 +9,5 @@ public:
 	UpdateMedicine(const wxString& title);
 	void OnUpdate(wxCommandEvent &event);
     void OnBack(wxCommandEvent& event);
+    wxDECLARE_EVENT_TABLE();
 };
