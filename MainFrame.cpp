@@ -2,6 +2,11 @@
 #include "MainFrame.h"
 #include "MyApp.h"
 #include "Menu.h"
+#include "MyApp.h"
+
+wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
