@@ -15,11 +15,14 @@ class DeleteMedicine : public wxFrame
 	wxButton* IdDelete, *NameDelete;
 	wxBoxSizer* sizer;
 
+	int id;
+
 
 public:
 	void OnDeleteByID(wxCommandEvent &event);
 	void OnDeleteByName(wxCommandEvent& event);
     void OnBack(wxCommandEvent& event);
+	void OnDeleteMedicineID(wxCommandEvent& event);
 	DeleteMedicine(const wxString& title);
 };
 

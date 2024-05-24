@@ -5,6 +5,7 @@
 #include "Product.h"
 DeleteMedicine::DeleteMedicine(const wxString &title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Delete Medicine", wxDefaultPosition, wxSize(1280, 720)), boldFont(wxFontInfo(12).Bold())
 {
+	id = -1;
 	panel = new wxPanel(this, wxID_ANY);
 	IdLabel = new wxStaticText(panel, wxID_ANY, wxT("Id:"));
 	IdLabel->SetFont(boldFont);
@@ -90,13 +91,14 @@ void DeleteMedicine::OnDeleteByName(wxCommandEvent &event)
 			buttons.push_back(new wxButton(panel, wxID_ANY, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
 			buttons[i]->SetFont(boldFont);
 			tmp ->Add(buttons[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
-
-			buttons[i]->Bind(wxEVT_BUTTON, &DeleteMedicine::OnDeleteByID, this);
+			id = product.id;
+			buttons[i]->Bind(wxEVT_BUTTON, &DeleteMedicine::OnDeleteMedicineID, this);
 			sizer->Add(tmp, 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 		}
 		sizer->AddStretchSpacer();
 		panel->Layout();
 	}
+	id = -1;
 }
 
 
@@ -106,4 +108,15 @@ void DeleteMedicine::OnBack(wxCommandEvent& event)
     frame->Show(true);
     MyApp::frames.pop();
     Close(true);
+}
+
+void DeleteMedicine::OnDeleteMedicineID(wxCommandEvent& event)
+{
+	Product product;
+	int tmp = product.Delete(id);
+	if (tmp)
+		wxMessageBox("Medicine deleted", "Success", wxOK | wxICON_INFORMATION);
+	else
+		wxMessageBox("Medicine not found");
+	id = -1;
 }

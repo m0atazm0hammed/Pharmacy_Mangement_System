@@ -12,4 +12,13 @@ bool MyApp::OnInit() {
     choiceFrame->Show(true);
     return true;
 }
+MyApp::~MyApp()
+{
+	while (!frames.empty())
+	{
+		auto frame = frames.top();
+		frames.pop();
+		frame->Destroy();
+	}
+}
 std::stack<wxFrame*> MyApp::frames;

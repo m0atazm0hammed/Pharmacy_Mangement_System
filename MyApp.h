@@ -4,4 +4,5 @@ class MyApp : public wxApp {
 public:
     static std::stack<wxFrame*> frames;
     bool OnInit() ;
+    ~MyApp();
 };
