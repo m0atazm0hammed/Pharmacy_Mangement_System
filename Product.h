@@ -7,7 +7,7 @@ public:
 	int price, stock;
 	char exp_date[11];
 	Product();
-	Product(int, char[20], int, int, int, char[11]);
+	Product(int, char[20], int, int, char[11]);
 	Product(Product &other);
 	~Product();
 
@@ -20,7 +20,6 @@ public:
 
 	void Price(int price);
 	void Stock(int stock);
-	void Size(int size);
 	void Exp_date(char exp_date[11]);
 
 	int ReturnPosition(int);

@@ -21,7 +21,6 @@ wxBEGIN_EVENT_TABLE(UpdateMedicine, wxFrame)
     PriceLabel->SetFont(boldFont);
     wxStaticText *StockLabel = new wxStaticText(panel, wxID_ANY, wxT("Stock:"));
     StockLabel->SetFont(boldFont);
-    SizeLabel->SetFont(boldFont);
     IdTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 150), wxSize(200, -1));           // Larger size
     PriceTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 190), wxSize(200, -1));        // Larger size
     StockTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 250), wxSize(200, -1));        // Larger size
