@@ -8,6 +8,7 @@ Welcome to the Pharmacy Management System repository! This project was developed
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Demo Video](#video)
 
 ## Introduction
 
@@ -47,4 +48,8 @@ To run this project on your local machine, follow these steps:
 ## Usage
 
 Once the system is running, follow the on-screen prompts to navigate through the different functionalities of the Pharmacy Management System. You can manage products and Employees by selecting the appropriate options from the menu.
+
+## Video
+
+Project Demo Video: [Pharmacy Management System Demo](https://drive.google.com/drive/folders/1_WE5INGh2apBcc_b4l5Z_L3_4iT99olM?usp=drive_link)
 
