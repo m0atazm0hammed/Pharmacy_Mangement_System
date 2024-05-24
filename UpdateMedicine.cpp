@@ -21,7 +21,7 @@ UpdateMedicine::UpdateMedicine(const wxString& title) :wxFrame(nullptr, wxID_ANY
     SizeTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
     wxButton* UpdateButton = new wxButton(panel, wxID_ANY, wxT("Update"), wxDefaultPosition, wxSize(200, 50)); // Larger size
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(790w, 10), wxSize(150, 30));
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(790, 10), wxSize(150, 30));
     backButton->Bind(wxEVT_BUTTON, &UpdateMedicine::OnBack, this);
     
     sizer->Add(IdLabel, 0, wxEXPAND | wxALL, 5);
