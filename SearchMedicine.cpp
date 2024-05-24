@@ -99,7 +99,7 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 			wxBoxSizer* tmp = new wxBoxSizer(wxVERTICAL);
 			product.LogicalFile.seekg(product.ReturnPosition(offsets[i]));
 			product.Read();
-			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
+			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
 			labels.push_back(new wxStaticText(panel, wxID_ANY, msg));
 			labels[i]->SetFont(boldFont);
 			tmp->Add(labels[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);

@@ -21,12 +21,10 @@ wxBEGIN_EVENT_TABLE(UpdateMedicine, wxFrame)
     PriceLabel->SetFont(boldFont);
     wxStaticText *StockLabel = new wxStaticText(panel, wxID_ANY, wxT("Stock:"));
     StockLabel->SetFont(boldFont);
-    wxStaticText *SizeLabel = new wxStaticText(panel, wxID_ANY, wxT("Size:"));
     SizeLabel->SetFont(boldFont);
     IdTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 150), wxSize(200, -1));           // Larger size
     PriceTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 190), wxSize(200, -1));        // Larger size
     StockTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 250), wxSize(200, -1));        // Larger size
-    SizeTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(343, 290), wxSize(200, -1));         // Larger size
     wxButton *UpdateButton = new wxButton(panel, wxID_ANY, wxT("Update"), wxPoint(343, 350), wxSize(200, -1)); // Larger size
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     wxButton *backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
@@ -39,8 +37,6 @@ wxBEGIN_EVENT_TABLE(UpdateMedicine, wxFrame)
     sizer->Add(PriceTextCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
     sizer->Add(StockLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
     sizer->Add(StockTextCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
-    sizer->Add(SizeLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
-    sizer->Add(SizeTextCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
     sizer->Add(UpdateButton, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
     sizer->AddStretchSpacer();
     panel->SetSizer(sizer);
@@ -57,15 +53,12 @@ void UpdateMedicine::OnUpdate(wxCommandEvent &event)
     int price = std::stoi(wxPrice.ToStdString());
     wxString wxStock = StockTextCtrl->GetValue();
     int stock = std::stoi(wxPrice.ToStdString());
-    wxString wxSize = SizeTextCtrl->GetValue();
-    int size = std::stoi(wxSize.ToStdString());
 
     Product product;
     product.id = id;
     product.price = price;
     product.stock = stock;
-    product.size = size;
-    int ret = product.Update(id, price, stock, size);
+    int ret = product.Update(id, price, stock);
     if (ret)
         wxMessageBox("Updated Seccessfully");
     else

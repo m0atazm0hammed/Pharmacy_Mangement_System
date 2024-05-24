@@ -4,7 +4,7 @@ class Product : public Entity
 {
 public:
 	
-	int price, stock, size;
+	int price, stock;
 	char exp_date[11];
 	Product();
 	Product(int, char[20], int, int, int, char[11]);
@@ -16,7 +16,7 @@ public:
 	void Read();
 	void Add();
 	int Delete(int);
-	int Update(int, int, int, int);
+	int Update(int, int, int);
 
 	void Price(int price);
 	void Stock(int stock);

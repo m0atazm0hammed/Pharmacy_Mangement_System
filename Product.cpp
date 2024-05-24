@@ -99,7 +99,7 @@ void Product::Add()
     LogicalFile.close();
 }
 
-int Product::Update(int id, int price, int stock, int size)
+int Product::Update(int id, int price, int stock)
 {
     int pos = ReturnPosition(id);
     if (pos == -1)
@@ -112,7 +112,6 @@ int Product::Update(int id, int price, int stock, int size)
     LogicalFile.seekp(pos, ios::beg);
     this->price = price;
     this->stock = stock;
-    this->size = size;
     Write();
     LogicalFile.close();
     return 1;
