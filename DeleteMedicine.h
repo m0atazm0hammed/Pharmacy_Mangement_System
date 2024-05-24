@@ -10,6 +10,7 @@ class DeleteMedicine : public wxFrame
 
 	wxStaticText* IdLabel;
 	wxStaticText* NameLabel;
+	wxButton* backButton;
 
 	wxButton* IdDelete, *NameDelete;
 	wxBoxSizer* sizer;
