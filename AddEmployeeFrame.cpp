@@ -9,6 +9,7 @@ wxBEGIN_EVENT_TABLE(AddEmployeeFrame, wxFrame)
             AddEmployeeFrame::AddEmployeeFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
+    SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
     wxPanel *panel = new wxPanel(this, wxID_ANY);
     wxFont boldFont(wxFontInfo(12).Bold());
     wxStaticText *IdLabel = new wxStaticText(panel, wxID_ANY, wxT("Id:"));

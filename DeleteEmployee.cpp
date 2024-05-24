@@ -11,6 +11,8 @@ wxEND_EVENT_TABLE()
 
 DeleteEmployee::DeleteEmployee(const wxString& title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Delete Employee", wxDefaultPosition, wxSize(1280, 720)), boldFont(wxFontInfo(12).Bold())
 {
+	SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
+
 	id = -1;
 	panel = new wxPanel(this, wxID_ANY);
 	IdLabel = new wxStaticText(panel, wxID_ANY, wxT("Id:"));

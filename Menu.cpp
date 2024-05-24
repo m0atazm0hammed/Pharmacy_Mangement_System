@@ -19,6 +19,8 @@ wxEND_EVENT_TABLE()
 Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, title,
 	wxPoint(30, 30), wxSize(1280, 720))
 {
+    SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
+
 	wxPanel* panel = new wxPanel(this, wxID_ANY);
 
     // Define a bold font

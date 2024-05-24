@@ -8,9 +8,10 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_CLOSE(MyApp::OnClose)
 wxEND_EVENT_TABLE()
 
-MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
-    : wxFrame(NULL, wxID_ANY, title, pos, size) {
-    // Panel to hold the controls
+MainFrame::MainFrame(const wxString&title, const wxPoint&pos, const wxSize& size):wxFrame(nullptr, wxID_ANY, title, pos, size)
+{
+    SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
+
     SetFont(GetFont().Scale(1.5));
     Center();
     wxPanel* panel = new wxPanel(this, wxID_ANY);
@@ -39,7 +40,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     panel->SetSizer(sizer);
 
     backButton->Bind(wxEVT_BUTTON, &MainFrame::OnBack, this);
-	loginButton->Bind(wxEVT_BUTTON, &MainFrame::Login, this);
+    loginButton->Bind(wxEVT_BUTTON, &MainFrame::Login, this);
     // Set the size of the frame
     sizer->Fit(this);
 }

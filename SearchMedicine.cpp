@@ -11,6 +11,8 @@ wxEND_EVENT_TABLE()
 
 SearchMedicine::SearchMedicine(const wxString& title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Search Medicine"), boldFont(wxFontInfo(12).Bold())
 {
+	SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
+
 	panel = new wxPanel(this);
 
 	NameLabel = new wxStaticText(panel, wxID_ANY, "Search by Name : ", wxPoint(343, 150));

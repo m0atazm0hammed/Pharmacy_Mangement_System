@@ -1,3 +1,4 @@
+#pragma once
 #include <wx/wx.h>
 class UpdateEmployeeFrame : public wxFrame {
 public:

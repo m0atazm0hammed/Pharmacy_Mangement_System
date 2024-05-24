@@ -11,6 +11,8 @@ wxBEGIN_EVENT_TABLE(UpdateMedicine, wxFrame)
 
             UpdateMedicine::UpdateMedicine(const wxString &title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Update Medicine")
 {
+    SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
+
     wxPanel *panel = new wxPanel(this, wxID_ANY);
     wxFont boldFont(wxFontInfo(12).Bold());
     wxStaticText *IdLabel = new wxStaticText(panel, wxID_ANY, wxT("Id:"));
