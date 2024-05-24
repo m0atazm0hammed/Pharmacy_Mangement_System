@@ -60,8 +60,8 @@ Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, titl
 
 void Menu::OnAddProduct(wxCommandEvent& event)
 {
-    auto frame = new AddMedicine("Add Medicine");//, wxPoint(30, 30), wxSize(800, 600));
-    frame->SetClientSize(800, 600);
+    auto frame = new AddMedicine("Add Medicine");//, wxPoint(30, 30), wxSize(1280, 720));
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -70,7 +70,7 @@ void Menu::OnAddProduct(wxCommandEvent& event)
 void Menu::OnUpdateProduct(wxCommandEvent& event)
 {
     auto frame = new UpdateMedicine("Update Medicine");
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -89,7 +89,7 @@ void Menu::OnDeleteProduct(wxCommandEvent& event)
 void Menu::OnSearchProduct(wxCommandEvent& event)
 {
     auto frame = new SearchMedicine("Search Medicine");
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -99,8 +99,8 @@ void Menu::OnSearchProduct(wxCommandEvent& event)
 
 void Menu::OnAddEmployee(wxCommandEvent& event)
 {
-    auto frame = new AddEmployeeFrame("Add Employee", wxPoint(30, 30), wxSize(800, 600));
-    frame->SetClientSize(800, 600);
+    auto frame = new AddEmployeeFrame("Add Employee", wxPoint(30, 30), wxSize(1280, 720));
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -108,8 +108,8 @@ void Menu::OnAddEmployee(wxCommandEvent& event)
 }
 void Menu::OnUpdateEmployee(wxCommandEvent& event)
 {
-    auto frame = new UpdateEmployeeFrame("Update Employee", wxPoint(30, 30), wxSize(800, 600));
-    frame->SetClientSize(800, 600);
+    auto frame = new UpdateEmployeeFrame("Update Employee", wxPoint(30, 30), wxSize(1280, 720));
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -118,7 +118,7 @@ void Menu::OnUpdateEmployee(wxCommandEvent& event)
 void Menu::OnDeleteEmployee(wxCommandEvent& event)
 {
     auto frame = new DeleteEmployee("Delete Employee");
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -128,7 +128,7 @@ void Menu::OnDeleteEmployee(wxCommandEvent& event)
 void Menu::OnSearchEmployee(wxCommandEvent& event)
 {
     auto frame = new SearchEmployee("Search Employee");
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);

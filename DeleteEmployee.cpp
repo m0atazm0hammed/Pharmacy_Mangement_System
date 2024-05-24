@@ -71,9 +71,7 @@ void DeleteEmployee::OnDeleteByName(wxCommandEvent& event)
 	}
 	else
 	{
-		std::vector<int> offsets(offset.begin(), offset.end());
-		std::vector<wxStaticText*> labels;
-		std::vector<wxButton*> buttons;
+		
 		employee.LogicalFile.open(employee.file_name, ios::in | ios::out | ios::binary);
 		IdTextCtrl->Show(false);
 		NameTextCtrl->Show(false);
@@ -84,6 +82,11 @@ void DeleteEmployee::OnDeleteByName(wxCommandEvent& event)
 		sizer->SetOrientation(wxHORIZONTAL);
 		sizer->Clear();
 		sizer->AddStretchSpacer();
+
+		offsets.assign(offset.begin(), offset.end());
+		labels.clear();
+		buttons.clear();
+
 		for (int i = 0; i < min(5, (int)offsets.size()); i++)
 		{
 			wxBoxSizer* tmp = new wxBoxSizer(wxVERTICAL);
@@ -94,11 +97,11 @@ void DeleteEmployee::OnDeleteByName(wxCommandEvent& event)
 				"\nPhone Num: " + wxString::FromUTF8(employee.phone_num) +
 				"\nSalary: " + wxString::Format(wxT("%i"), employee.salary) +
 				"\nShift: " + wxString::FromUTF8(employee.shift);
-			labels.push_back(new wxStaticText(panel, wxID_ANY, msg));
+			labels.push_back(new wxStaticText(panel, employee.id, msg));
 			labels[i]->SetFont(boldFont);
 			tmp->Add(labels[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 
-			buttons.push_back(new wxButton(panel, employee.id, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
+			buttons.push_back(new wxButton(panel, i, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
 			buttons[i]->SetFont(boldFont);
 			tmp->Add(buttons[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 			buttons[i]->Bind(wxEVT_BUTTON, &DeleteEmployee::OnDeleteEmployeeID, this);
@@ -121,7 +124,10 @@ void DeleteEmployee::OnBack(wxCommandEvent& event)
 
 void DeleteEmployee::OnDeleteEmployeeID(wxCommandEvent& event)
 {
-	id = event.GetId();
+	int index = event.GetId();
+	id = labels[index]->GetId();
+	labels[index]->Destroy();
+	buttons[index]->Destroy();
 	Employee employee;
 	int tmp = employee.Delete(id);
 	if (tmp)

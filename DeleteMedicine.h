@@ -14,6 +14,9 @@ class DeleteMedicine : public wxFrame
 
 	wxButton* IdDelete, *NameDelete;
 	wxBoxSizer* sizer;
+	std::vector<int> offsets;
+	std::vector<wxStaticText*> labels;
+	std::vector<wxButton*> buttons;
 
 	int id;
 

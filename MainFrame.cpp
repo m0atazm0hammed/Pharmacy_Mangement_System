@@ -12,11 +12,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     // Username
     wxStaticText* userLabel = new wxStaticText(panel, wxID_ANY, wxT("Username:"));
-    userText = new wxTextCtrl(panel, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(250, -1)); // Width set to 250 pixels
+    userText = new wxTextCtrl(panel, wxID_ANY, wxT("admin"), wxDefaultPosition, wxSize(250, -1)); // Width set to 250 pixels
 
     // Password
     wxStaticText* passLabel = new wxStaticText(panel, wxID_ANY, wxT("Password:"));
-    passText = new wxTextCtrl(panel, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(250, -1), wxTE_PASSWORD); // Width set to 250 pixels
+    passText = new wxTextCtrl(panel, wxID_ANY, wxT("admin"), wxDefaultPosition, wxSize(250, -1), wxTE_PASSWORD); // Width set to 250 pixels
 
     // Login button
     wxButton* loginButton = new wxButton(panel, wxID_ANY, wxT("Login"), wxPoint(50, 10), wxSize(150, 30));
@@ -47,7 +47,7 @@ void MainFrame::Login(wxCommandEvent& event)
 	if (user == "admin" && pass == "admin")
 	{
 		auto frame = new Menu("Manager Dashboard", true);
-		frame->SetClientSize(800, 600);
+		frame->SetClientSize(1280, 720);
 		frame->Center();
 		frame->Show(true);
         MyApp::frames.push(this);

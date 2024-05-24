@@ -15,6 +15,9 @@ class DeleteEmployee : public wxFrame
 	wxButton* IdDelete, * NameDelete;
 	wxBoxSizer* sizer;
 	int id;
+	std::vector<int> offsets;
+	std::vector<wxStaticText*> labels;
+	std::vector<wxButton*> buttons;
 
 public:
 	void OnDeleteByID(wxCommandEvent& event);
