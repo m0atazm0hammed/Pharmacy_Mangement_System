@@ -10,6 +10,7 @@ wxBEGIN_EVENT_TABLE(AddMedicine, wxFrame)
 wxEND_EVENT_TABLE()
 
 AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Add Medicine") {
+	SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
 	SetFont(GetFont().Scale(1.5));
 	 panel = new wxPanel(this);
 

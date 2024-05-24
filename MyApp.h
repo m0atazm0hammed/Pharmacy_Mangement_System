@@ -1,3 +1,4 @@
+#pragma once
 #include"wx/wx.h"
 #include <stack>
 class MyApp : public wxApp {
@@ -7,3 +8,4 @@ public:
     bool OnInit() ;
     void OnClose(wxCloseEvent& event);
 };
+

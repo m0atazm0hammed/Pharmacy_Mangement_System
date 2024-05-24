@@ -5,6 +5,8 @@
 
 LoginChoiceFrame::LoginChoiceFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     :wxFrame(NULL, wxID_ANY, title, pos, size) {
+    SetIcon(wxIcon(wxT("icon.ico"), wxBITMAP_TYPE_ICO));
+
     wxPanel* panel = new wxPanel(this, wxID_ANY);
 
     // Define a bold font
