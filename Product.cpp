@@ -131,9 +131,90 @@ int Product::Delete(int id)
     Read();
     LogicalFile.seekp(pos, ios::beg);
     LogicalFile.put('*');
-    LogicalFile.close();
     Avail_List.push_back(AvailList(Count(pos), pos));
+    LogicalFile.close();
     indexes.primary_keys.erase(id);
     indexes.secondary_keys[name].erase(id);
     return 1;
+}
+
+
+int Product::BestFit(int size)
+{
+    int pos = -1;
+    int ind;
+    int mn = 1e9;
+    for (int i = 0; i < Avail_List.size(); i++)
+    {
+        if (Avail_List[i].sz >= size && Avail_List[i].sz < mn)
+        {
+            mn = Avail_List[i].sz;
+            ind = i;
+            pos = Avail_List[i].offset;
+        }
+    }
+    if (pos != -1)
+        Avail_List.erase(Avail_List.begin() + ind);
+
+    return pos;
+}
+
+int Product::ReturnPosition(int id)
+{
+	if (indexes.primary_keys.find(id) == indexes.primary_keys.end())
+    {
+		return -1;
+	}
+	return *indexes.primary_keys[id].begin();
+}
+
+set<int>& Product::ReturnPosition(char name[20])
+{
+    return indexes.secondary_keys[string(name)];
+}
+
+
+void Product::save_files()
+{
+    indexes.write(primary_file_name, secondary_file_name);
+
+
+    LogicalFile.open(deleted_file_name, ios::out | ios::binary);
+    for (int i = 0; i < Avail_List.size(); ++i)
+    {
+        int sz = Avail_List[i].sz, offset = Avail_List[i].offset;
+        LogicalFile.write((char*)&offset, sizeof(offset));
+        LogicalFile.write((char*)&sz, sizeof(sz));
+    }  
+    LogicalFile.close();
+}
+
+void Product::load_files()
+{
+    LogicalFile.open(file_name, ios::in | ios::out | ios::binary);
+    if (!LogicalFile.is_open())
+    {
+        LogicalFile.open(file_name, ios::out | ios::binary);
+        LogicalFile.close();
+    }
+    else
+        LogicalFile.close();
+
+    indexes.read(primary_file_name, secondary_file_name);
+    LogicalFile.open(deleted_file_name, ios::in | ios::out | ios::binary);
+    if (LogicalFile.is_open())
+    {
+        LogicalFile.seekp(0, ios::end);
+        int size = LogicalFile.tellp();
+        LogicalFile.seekg(0, ios::beg);
+        
+        while (LogicalFile.tellg() < size && !LogicalFile.eof())
+        {
+            AvailList temp;
+            LogicalFile.read((char*)&temp.offset, sizeof(temp.offset));
+            LogicalFile.read((char*)&temp.sz, sizeof(temp.sz));
+            Avail_List.push_back(temp);
+        }
+        LogicalFile.close();
+    }
 }

@@ -13,7 +13,6 @@ class Person : public Entity
 		~Person();
 		Person(Person &other);
 
-		int Update(int id);
 
 
 		void Write();

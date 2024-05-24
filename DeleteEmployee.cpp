@@ -123,7 +123,6 @@ void DeleteEmployee::OnDeleteEmployeeID(wxCommandEvent& event)
 {
 	id = event.GetId();
 	Employee employee;
-	wxMessageBox(std::to_string(id));
 	int tmp = employee.Delete(id);
 	if (tmp)
 		wxMessageBox("Employee deleted", "Success", wxOK | wxICON_INFORMATION);

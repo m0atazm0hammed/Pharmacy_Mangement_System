@@ -26,7 +26,6 @@ Person::Person(Person &other)
 
 Person::~Person()
 {
-    save_files();
 }
 
 void Person::Write()

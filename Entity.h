@@ -26,20 +26,7 @@ public:
 	vector<AvailList> Avail_List;
 	fstream LogicalFile;
 
-	void Add();
-	int Update(int);
-	int Delete(int);
 
-	int ReturnPosition(int);
-	set<int> &ReturnPosition(char[20]);
-
-	int BestFit(int);
-	void load_files();
-	void save_files();
-
-	void Write();
-	int Size();
-	void Read();
 	int Count(int);
 
 	void Name(char name[20]);

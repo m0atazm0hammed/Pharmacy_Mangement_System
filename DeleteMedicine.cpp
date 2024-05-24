@@ -89,12 +89,12 @@ void DeleteMedicine::OnDeleteByName(wxCommandEvent &event)
 			wxBoxSizer* tmp = new wxBoxSizer(wxVERTICAL);
 			product.LogicalFile.seekg(product.ReturnPosition(offsets[i]));
 			product.Read();
-			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);	
+			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);	
 			labels.push_back(new wxStaticText(panel, wxID_ANY, msg));
 			labels[i]->SetFont(boldFont);
 			tmp->Add(labels[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 
-			buttons.push_back(new wxButton(panel, wxID_ANY, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
+			buttons.push_back(new wxButton(panel, product.id, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
 			buttons[i]->SetFont(boldFont);
 			tmp ->Add(buttons[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 			id = product.id;
@@ -119,6 +119,7 @@ void DeleteMedicine::OnBack(wxCommandEvent& event)
 
 void DeleteMedicine::OnDeleteMedicineID(wxCommandEvent& event)
 {
+	id = event.GetId();
 	Product product;
 	int tmp = product.Delete(id);
 	if (tmp)

@@ -22,4 +22,14 @@ public:
 	void Stock(int stock);
 	void Size(int size);
 	void Exp_date(char exp_date[11]);
+
+	int ReturnPosition(int);
+	set<int> &ReturnPosition(char[20]);
+
+	int BestFit(int);
+	
+
+	void load_files();
+	void save_files();
+
 };

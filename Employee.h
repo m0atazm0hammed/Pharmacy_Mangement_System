@@ -14,11 +14,16 @@ class Employee : public Person
         void Write();
 		int Size();
 		void Read();
+        int Delete(int);
         void Add();
         int Update(int, char[20], int, char[20]);
 
         void Salary(int salary);
         void Shift(char shift[20]);
+            
+        void load_files();
+        void save_files();
+
 
         int ReturnPosition(int);
         set<int> &ReturnPosition(char[20]);
