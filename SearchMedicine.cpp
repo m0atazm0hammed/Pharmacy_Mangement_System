@@ -60,7 +60,7 @@ void SearchMedicine::OnSearchById(wxCommandEvent &event)
 		product.LogicalFile.open(product.file_name, ios::in | ios::binary);
 		product.LogicalFile.seekg(offset);
 		product.Read();
-		wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nSize: " + wxString::Format(wxT("%i"), product.size) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
+		wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);
 		wxMessageBox("Medicine found", "Success", wxOK | wxICON_INFORMATION);
 		product.LogicalFile.close();
 	}

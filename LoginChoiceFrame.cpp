@@ -39,7 +39,7 @@ LoginChoiceFrame::LoginChoiceFrame(const wxString& title, const wxPoint& pos, co
 
 void LoginChoiceFrame::OnManagerButton(wxCommandEvent& event) {
     MainFrame* frame = new MainFrame("Manager Login", wxDefaultPosition, wxSize(300, 200));
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);
@@ -47,7 +47,7 @@ void LoginChoiceFrame::OnManagerButton(wxCommandEvent& event) {
 }
 void LoginChoiceFrame::OnEmployeeButton(wxCommandEvent& event) {
     auto frame = new Menu("Employee Dashboard", false);
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
     MyApp::frames.push(this);

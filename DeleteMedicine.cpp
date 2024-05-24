@@ -71,9 +71,10 @@ void DeleteMedicine::OnDeleteByName(wxCommandEvent &event)
 	}
 	else
 	{
-		std::vector<int> offsets(offset.begin(), offset.end());
-		std::vector<wxStaticText *> labels;
-		std::vector<wxButton *> buttons;
+		offsets.assign(offset.begin(), offset.end());
+		labels.clear();
+		buttons.clear();
+	
 		product.LogicalFile.open(product.file_name, ios::in | ios::out | ios::binary);
 		IdTextCtrl->Show(false);
 		NameTextCtrl->Show(false);
@@ -90,11 +91,11 @@ void DeleteMedicine::OnDeleteByName(wxCommandEvent &event)
 			product.LogicalFile.seekg(product.ReturnPosition(offsets[i]));
 			product.Read();
 			wxString msg = "ID: " + wxString::Format(wxT("%i"), product.id) + "\nName: " + wxString::FromUTF8(product.name) + "\nPrice: " + wxString::Format(wxT("%i"), product.price) + "\nStock: " + wxString::Format(wxT("%i"), product.stock) + "\nExpiry Date: " + wxString::FromUTF8(product.exp_date);	
-			labels.push_back(new wxStaticText(panel, wxID_ANY, msg));
+			labels.push_back(new wxStaticText(panel, product.id, msg));
 			labels[i]->SetFont(boldFont);
 			tmp->Add(labels[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 
-			buttons.push_back(new wxButton(panel, product.id, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
+			buttons.push_back(new wxButton(panel, i, wxString("Delete"), wxDefaultPosition, wxSize(200, 35)));
 			buttons[i]->SetFont(boldFont);
 			tmp ->Add(buttons[i], 0, wxALIGN_CENTER_VERTICAL | wxALL, 10);
 			id = product.id;
@@ -119,7 +120,10 @@ void DeleteMedicine::OnBack(wxCommandEvent& event)
 
 void DeleteMedicine::OnDeleteMedicineID(wxCommandEvent& event)
 {
-	id = event.GetId();
+	int index = event.GetId();
+	id = labels[index]->GetId();
+	labels[index]->Destroy();
+	buttons[index]->Destroy();
 	Product product;
 	int tmp = product.Delete(id);
 	if (tmp)
