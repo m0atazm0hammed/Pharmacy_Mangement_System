@@ -14,6 +14,8 @@ wxBEGIN_EVENT_TABLE(Menu, wxFrame)
     EVT_CLOSE(MyApp::OnClose)
 wxEND_EVENT_TABLE()
 
+#include "SearchEmployee.h"
+#include "DeleteEmployee.h"
 Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, title,
 	wxPoint(30, 30), wxSize(1280, 720))
 {
@@ -115,7 +117,7 @@ void Menu::OnUpdateEmployee(wxCommandEvent& event)
 }
 void Menu::OnDeleteEmployee(wxCommandEvent& event)
 {
-    auto frame = new DeleteMedicine("Delete Employee");
+    auto frame = new DeleteEmployee("Delete Employee");
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
@@ -125,7 +127,7 @@ void Menu::OnDeleteEmployee(wxCommandEvent& event)
 
 void Menu::OnSearchEmployee(wxCommandEvent& event)
 {
-    auto frame = new SearchMedicine("Search Employee");
+    auto frame = new SearchEmployee("Search Employee");
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);

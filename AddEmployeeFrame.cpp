@@ -1,5 +1,6 @@
 #include "AddEmployeeFrame.h"
 #include "Employee.h"
+#include "MyApp.h"
 
 AddEmployeeFrame::AddEmployeeFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     :wxFrame(NULL, wxID_ANY, title, pos, size) {
@@ -22,6 +23,10 @@ AddEmployeeFrame::AddEmployeeFrame(const wxString& title, const wxPoint& pos, co
     shiftTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
     wxButton* AddButton = new wxButton(panel, wxID_ANY, wxT("Add"), wxDefaultPosition, wxSize(200, 50)); // Larger size
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    backButton->Bind(wxEVT_BUTTON, &AddEmployeeFrame::OnBack, this);
+
+    sizer->AddStretchSpacer();
     sizer->Add(IdLabel, 0, wxEXPAND | wxALL, 5);
     sizer->Add(IdTextCtrl, 0, wxEXPAND | wxALL, 5);
     sizer->Add(nameLabel, 0, wxEXPAND | wxALL, 5);
@@ -58,4 +63,13 @@ void AddEmployeeFrame::OnAdd(wxCommandEvent& event) {
     emp.Shift(shiftt);
     emp.Add();
     wxMessageBox("Added Seccessfully");
+}
+
+
+void AddEmployeeFrame::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close(true);
 }
