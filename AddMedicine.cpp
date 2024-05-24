@@ -2,6 +2,7 @@
 #include<wx/wx.h>
 #include "MainFrame.h"
 #include "Product.h"
+#include "MyApp.h"
 AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Add Medicine") {
 	SetFont(GetFont().Scale(1.5));
 	wxPanel* panel = new wxPanel(this);
@@ -13,7 +14,8 @@ AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Phar
 	textctrl1 = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
 	wxButton* button = new wxButton(panel, wxID_ANY, "Add", wxPoint(300, 390), wxSize(200, -1));
 	
-	
+	wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    backButton->Bind(wxEVT_BUTTON, &AddMedicine::OnBack, this);
 	button->Bind(wxEVT_BUTTON, &AddMedicine::OnAdd, this);
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddStretchSpacer();
@@ -43,4 +45,12 @@ void AddMedicine::OnAdd(wxCommandEvent& event)
 	strcpy(product.exp_date, "15-05-2025");
 	product.Add();
 	wxMessageBox("Medicine added", "Success", wxOK | wxICON_INFORMATION);
+}
+
+void AddMedicine::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close(true);
 }

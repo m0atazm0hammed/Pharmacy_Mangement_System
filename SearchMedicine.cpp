@@ -21,7 +21,8 @@ SearchMedicine::SearchMedicine(const wxString& title) : wxFrame(nullptr, wxID_AN
 
 	searchById->Bind(wxEVT_BUTTON, &SearchMedicine::OnSearchById, this);
 	searchByName->Bind(wxEVT_BUTTON, &SearchMedicine::OnSearchByName, this);
-
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    backButton->Bind(wxEVT_BUTTON, &SearchMedicine::OnBack, this);
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddStretchSpacer();
 	sizer->Add(statictext, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
@@ -81,4 +82,13 @@ void SearchMedicine::OnSearchByName(wxCommandEvent &event)
 		}
 		product.LogicalFile.close();
 	}
+}
+
+
+void SearchMedicine::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close(true);
 }

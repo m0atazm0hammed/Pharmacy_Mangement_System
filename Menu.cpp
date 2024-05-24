@@ -56,7 +56,8 @@ void Menu::OnAddProduct(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 void Menu::OnUpdateProduct(wxCommandEvent& event)
 {
@@ -64,7 +65,8 @@ void Menu::OnUpdateProduct(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 void Menu::OnDeleteProduct(wxCommandEvent& event)
 {
@@ -72,7 +74,8 @@ void Menu::OnDeleteProduct(wxCommandEvent& event)
     frame->SetClientSize(1280, 720);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 
 void Menu::OnSearchProduct(wxCommandEvent& event)
@@ -81,7 +84,8 @@ void Menu::OnSearchProduct(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 
 
@@ -91,7 +95,8 @@ void Menu::OnAddEmployee(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 void Menu::OnUpdateEmployee(wxCommandEvent& event)
 {
@@ -99,7 +104,8 @@ void Menu::OnUpdateEmployee(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 void Menu::OnDeleteEmployee(wxCommandEvent& event)
 {
@@ -107,7 +113,8 @@ void Menu::OnDeleteEmployee(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
 }
 
 void Menu::OnSearchEmployee(wxCommandEvent& event)
@@ -116,7 +123,9 @@ void Menu::OnSearchEmployee(wxCommandEvent& event)
     frame->SetClientSize(800, 600);
     frame->Center();
     frame->Show(true);
-    Close();
+    MyApp::frames.push(this);
+    Show(false);
+
 }
 
 void Menu::OnBack(wxCommandEvent& event)

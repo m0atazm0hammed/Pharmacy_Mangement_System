@@ -20,6 +20,9 @@ UpdateMedicine::UpdateMedicine(const wxString& title) :wxFrame(nullptr, wxID_ANY
     SizeTextCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(300, 30)); // Larger size
     wxButton* UpdateButton = new wxButton(panel, wxID_ANY, wxT("Update"), wxDefaultPosition, wxSize(200, 50)); // Larger size
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    backButton->Bind(wxEVT_BUTTON, &UpdateMedicine::OnBack, this);
+    
     sizer->Add(IdLabel, 0, wxEXPAND | wxALL, 5);
     sizer->Add(IdTextCtrl, 0, wxEXPAND | wxALL, 5);
     sizer->Add(PriceLabel, 0, wxEXPAND | wxALL, 5);
@@ -56,4 +59,13 @@ void UpdateMedicine::OnUpdate(wxCommandEvent &event)
         wxMessageBox("Updated Seccessfully");
     else
         wxMessageBox("Update Failed");
+}
+
+
+void UpdateMedicine::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close(true);
 }

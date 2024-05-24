@@ -16,5 +16,6 @@ private:
 public:
 	SearchMedicine(const wxString &title);
 	void OnSearchById(wxCommandEvent &event);
+    void OnBack(wxCommandEvent &event);
 	void OnSearchByName(wxCommandEvent &event);
 };

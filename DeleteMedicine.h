@@ -18,6 +18,7 @@ class DeleteMedicine : public wxFrame
 public:
 	void OnDeleteByID(wxCommandEvent &event);
 	void OnDeleteByName(wxCommandEvent& event);
+    void OnBack(wxCommandEvent& event);
 	DeleteMedicine(const wxString& title);
 };
 

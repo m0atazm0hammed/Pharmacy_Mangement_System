@@ -8,4 +8,5 @@ wxTextCtrl* IdTextCtrl, *PriceTextCtrl, *StockTextCtrl, *SizeTextCtrl;
 public:
 	UpdateMedicine(const wxString& title);
 	void OnUpdate(wxCommandEvent &event);
+    void OnBack(wxCommandEvent& event);
 };

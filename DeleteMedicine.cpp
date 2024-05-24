@@ -19,7 +19,8 @@ DeleteMedicine::DeleteMedicine(const wxString &title) : wxFrame(nullptr, wxID_AN
 
 	NameDelete = new wxButton(panel, wxID_ANY, wxT("Delete by Name"), wxDefaultPosition, wxSize(200, 35)); // Larger size
 	NameDelete->SetFont(boldFont);
-
+    wxButton* backButton = new wxButton(panel, wxID_ANY, wxT("Back"), wxPoint(10, 10), wxSize(150, 30));
+    backButton->Bind(wxEVT_BUTTON, &DeleteMedicine::OnBack, this);
 	sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddStretchSpacer();
 	sizer->Add(IdLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
@@ -95,4 +96,13 @@ void DeleteMedicine::OnDeleteByName(wxCommandEvent &event)
 		sizer->AddStretchSpacer();
 		panel->Layout();
 	}
+}
+
+
+void DeleteMedicine::OnBack(wxCommandEvent& event)
+{
+    auto frame = MyApp::frames.top();
+    frame->Show(true);
+    MyApp::frames.pop();
+    Close(true);
 }
