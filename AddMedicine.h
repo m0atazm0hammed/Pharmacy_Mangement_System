@@ -14,4 +14,3 @@ public:
     void OnBack(wxCommandEvent& event);
 	void OnAdd(wxCommandEvent& event);
 };
-

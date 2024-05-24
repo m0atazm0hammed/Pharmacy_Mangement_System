@@ -5,14 +5,14 @@ class SearchMedicine : public wxFrame
 	
 private:
 	wxPanel *panel;
-	wxStaticText *statictext;
-	wxTextCtrl *textctrl;
-	wxStaticText *statictext1;
-	wxTextCtrl *textctrl1;
+	wxStaticText *NameLabel;
+	wxTextCtrl *NameCtrl;
+	wxStaticText *IdLabel;
+	wxTextCtrl *IdCtrl;
 	wxButton *searchById;
 	wxButton *searchByName;
 	wxFont boldFont;
-
+	wxBoxSizer* sizer;
 public:
 	SearchMedicine(const wxString &title);
 	void OnSearchById(wxCommandEvent &event);

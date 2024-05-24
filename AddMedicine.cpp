@@ -60,5 +60,5 @@ void AddMedicine::OnBack(wxCommandEvent& event)
     auto frame = MyApp::frames.top();
     frame->Show(true);
     MyApp::frames.pop();
-    Close(true);
+    Close();
 }
