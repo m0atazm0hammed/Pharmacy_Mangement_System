@@ -11,6 +11,7 @@ bool MyApp::OnInit() {
     auto choiceFrame = new LoginChoiceFrame("Choose Login Type", wxDefaultPosition, wxSize(300, 200));
     choiceFrame->SetClientSize(800, 600);
     choiceFrame->Center();
+    wxSizerFlags::DisableConsistencyChecks();
     choiceFrame->Show(true);
     return true;
 }
