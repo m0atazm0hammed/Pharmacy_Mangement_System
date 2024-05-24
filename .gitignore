@@ -34,3 +34,8 @@
 .vscode
 *.txt
 *.out
+
+Debug
+Release
+x64
+*.vcxproj*
