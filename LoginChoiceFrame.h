@@ -6,4 +6,5 @@ public:
 private:
     void OnManagerButton(wxCommandEvent& event);
     void OnEmployeeButton(wxCommandEvent& event);
+
 };

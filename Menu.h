@@ -14,4 +14,6 @@ public:
 	void OnDeleteEmployee(wxCommandEvent& event);
 	void OnSearchProduct(wxCommandEvent& event);
 	void OnSearchEmployee(wxCommandEvent& event);
+    wxDECLARE_EVENT_TABLE();
+
 };

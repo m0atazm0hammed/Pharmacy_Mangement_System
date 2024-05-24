@@ -8,6 +8,12 @@
 #include "UpdateEmployeeFrame.h"
 #include "MyApp.h"
 #include "AddMedicine.h"
+
+
+wxBEGIN_EVENT_TABLE(Menu, wxFrame)
+    EVT_CLOSE(MyApp::OnClose)
+wxEND_EVENT_TABLE()
+
 Menu::Menu(const wxString& title, bool manager) :wxFrame(nullptr, wxID_ANY, title,
 	wxPoint(30, 30), wxSize(1280, 720))
 {
