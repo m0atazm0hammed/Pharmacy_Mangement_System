@@ -2,6 +2,7 @@
 #include <wx/wx.h>
 #include "MainFrame.h"
 #include "Product.h"
+#include "MyApp.h"
 SearchMedicine::SearchMedicine(const wxString& title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Search Medicine"), boldFont(wxFontInfo(12).Bold())
 {
 	wxPanel *panel = new wxPanel(this);

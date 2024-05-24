@@ -1,6 +1,7 @@
 #include "DeleteMedicine.h"
 #include <wx/wx.h>
 #include "MainFrame.h"
+#include "MyApp.h"
 #include "Product.h"
 DeleteMedicine::DeleteMedicine(const wxString &title) : wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Delete Medicine", wxDefaultPosition, wxSize(1280, 720)), boldFont(wxFontInfo(12).Bold())
 {

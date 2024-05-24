@@ -2,6 +2,7 @@
 #include<wx/spinctrl.h>
 #include<wx/wx.h>
 #include "MainFrame.h"
+#include "MyApp.h"
 #include "Product.h"
 UpdateMedicine::UpdateMedicine(const wxString& title) :wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Update Medicine") {
 	wxPanel* panel = new wxPanel(this, wxID_ANY);
