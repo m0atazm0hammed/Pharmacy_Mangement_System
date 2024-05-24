@@ -4,23 +4,36 @@
 #include "Product.h"
 AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Pharmacy Management System - Add Medicine") {
 	SetFont(GetFont().Scale(1.5));
-	wxPanel* panel = new wxPanel(this);
+	 panel = new wxPanel(this);
 
 	//wxCheckBox* checkBox = new wxCheckBox(panel,wxID_ANY,"Vitamin C",wxPoint(550,55));
-	wxStaticText* statictext = new wxStaticText(panel, wxID_ANY, " Enter Name : ", wxPoint(343, 150));
-	 textctrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 190), wxSize(200, -1));
-	wxStaticText* statictext1 = new wxStaticText(panel, wxID_ANY, " Enter ID : ", wxPoint(343, 250));
-	textctrl1 = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
-	wxButton* button = new wxButton(panel, wxID_ANY, "Add", wxPoint(300, 390), wxSize(200, -1));
+	NameLabel = new wxStaticText(panel, wxID_ANY, " Enter Name : ", wxPoint(343, 150));
+	NameCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 190), wxSize(200, -1));
+	IdLabel = new wxStaticText(panel, wxID_ANY, " Enter ID : ", wxPoint(343, 250));
+	IdCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 290), wxSize(200, -1));
+	PriceLabel = new wxStaticText(panel, wxID_ANY, " Enter Price : ", wxPoint(343, 350));
+	PriceCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 390), wxSize(200, -1));
+	StockLabel = new wxStaticText(panel, wxID_ANY, " Enter Stock : ", wxPoint(343, 450));
+	StockCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 490), wxSize(200, -1));
+	Exp_dateLabel = new wxStaticText(panel, wxID_ANY, " Enter Exp_date : ", wxPoint(343, 550));
+	Exp_dateCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(300, 590), wxSize(200, -1));
+
+	button = new wxButton(panel, wxID_ANY, "Add", wxPoint(300, 390), wxSize(200, -1));
 	
 	
 	button->Bind(wxEVT_BUTTON, &AddMedicine::OnAdd, this);
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddStretchSpacer();
-	sizer->Add(statictext, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
-	sizer->Add(textctrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
-	sizer->Add(statictext1, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
-	sizer->Add(textctrl1, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(NameLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(NameCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(IdLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(IdCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(PriceLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(PriceCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(StockLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(StockCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(Exp_dateLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+	sizer->Add(Exp_dateCtrl, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
 	sizer->Add(button, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
 	sizer->AddStretchSpacer();
 	panel->SetSizer(sizer);
@@ -30,17 +43,12 @@ AddMedicine::AddMedicine(const wxString& title):wxFrame(nullptr, wxID_ANY, "Phar
 
 void AddMedicine::OnAdd(wxCommandEvent& event)
 {
-	wxString wxName = textctrl->GetValue();
-	std::string name = wxName.ToStdString();
-	wxString wxId = textctrl1->GetValue();
-	int id = wxAtoi(wxId);
 	Product product;
-	product.id = id;
-	strcpy(product.name, name.c_str());
-	product.price = 0;
-	product.stock = 0;
-	product.size = 0;
-	strcpy(product.exp_date, "15-05-2025");
+	product.id = wxAtoi(IdCtrl->GetValue());
+	strcpy(product.name, NameCtrl->GetValue().c_str());
+	product.price = wxAtoi(PriceCtrl->GetValue());
+	product.stock = wxAtoi(StockCtrl->GetValue());
+	strcpy(product.exp_date, Exp_dateCtrl->GetValue().c_str());
 	product.Add();
 	wxMessageBox("Medicine added", "Success", wxOK | wxICON_INFORMATION);
 }
